@@ -11,7 +11,7 @@ export interface RecipeImage {
 export default function RecipeImageCarousel({ images }: { images: RecipeImage[] }) {
   return (
     <>
-      <div className="carousel carousel-center max-w-full p-4 space-x-4 bg-transparent rounded-box">
+      <div className="carousel carousel-center max-w-full p-4 pl-0 space-x-4 bg-transparent rounded-box">
         {images.map((image, index) => (
           <div key={index} className="carousel-item ">
             {/* TODO: Use image id here */}

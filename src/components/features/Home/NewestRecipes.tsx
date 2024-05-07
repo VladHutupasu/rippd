@@ -2,7 +2,9 @@ import RecipeImageCarousel, { RecipeImage } from '@shared/components/shared/Reci
 import chiaPudding from '../../../../public/recipes/chia-pudding.jpeg';
 import codFillet from '../../../../public/recipes/cod-fillet.jpeg';
 import hummus from '../../../../public/recipes/hummus.jpeg';
+import pastaBolognese from '../../../../public/recipes/pasta-bolognese.jpeg';
 import smoothie from '../../../../public/recipes/smoothie.jpeg';
+import tunaSalad from '../../../../public/recipes/tuna-salad.jpeg';
 
 export default function NewestRecipes() {
   const newestRecipes: RecipeImage[] = [
@@ -29,6 +31,18 @@ export default function NewestRecipes() {
       src: smoothie,
       alt: 'Smoothie',
       description: 'Smoothie',
+    },
+    {
+      id: 'test',
+      src: tunaSalad,
+      alt: 'Tuna salad',
+      description: 'Tuna salad',
+    },
+    {
+      id: 'test',
+      src: pastaBolognese,
+      alt: 'Pasta bolognese',
+      description: 'Pasta bolognese',
     },
   ];
 

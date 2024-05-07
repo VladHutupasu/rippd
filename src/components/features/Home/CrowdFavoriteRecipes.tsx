@@ -2,10 +2,24 @@ import RecipeImageCarousel, { RecipeImage } from '@shared/components/shared/Reci
 import chiaPudding from '../../../../public/recipes/chia-pudding.jpeg';
 import codFillet from '../../../../public/recipes/cod-fillet.jpeg';
 import hummus from '../../../../public/recipes/hummus.jpeg';
+import pastaBolognese from '../../../../public/recipes/pasta-bolognese.jpeg';
 import smoothie from '../../../../public/recipes/smoothie.jpeg';
+import tunaSalad from '../../../../public/recipes/tuna-salad.jpeg';
 
 export default function CrowdFavoriteRecipes() {
   const crowdFavoriteRecipes: RecipeImage[] = [
+    {
+      id: 'test',
+      src: tunaSalad,
+      alt: 'Tuna salad',
+      description: 'Tuna salad',
+    },
+    {
+      id: 'test',
+      src: pastaBolognese,
+      alt: 'Pasta bolognese',
+      description: 'Pasta bolognese',
+    },
     {
       id: 'test',
       src: smoothie,

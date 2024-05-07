@@ -1,9 +1,12 @@
 import Header from '@shared/components/core/Header';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+});
 
 export const metadata: Metadata = {
   title: 'Rippd',
@@ -16,10 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className="h-full">
+      <body className={inter.className + ' min-h-full bg-[url("/background.webp")] m-0 p-0 box-border'}>
         <Header />
-        <main className="w-11/12 sm:w-4/5 m-auto flex flex-col mt-28 sm:mt-36">{children}</main>
+        <main className="w-11/12 sm:w-7/12 m-auto flex flex-col pt-28 sm:pt-36">{children}</main>
       </body>
     </html>
   );
