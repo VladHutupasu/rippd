@@ -3,8 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function RecipeImageCarousel({ recipes }: { recipes: Recipe[] }) {
-  console.log('IMAGE SRC', recipes[0].imageSrc);
-
   return (
     <>
       <div className="carousel carousel-center max-w-full p-4 pl-0 space-x-4 bg-transparent rounded-box">
