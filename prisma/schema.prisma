@@ -10,5 +10,106 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = env("DATABASE_PRISMA_URL") // uses connection pooling
+  directUrl = env("DATABASE_URL_NON_POOLING") // uses a direct connection
+}
+
+model User {
+  id        String     @id @default(uuid())
+  email     String     @unique
+  name      String
+  Favorites Favorite[]
+}
+
+model Favorite {
+  id       String @id @default(uuid())
+  userId   String
+  recipeId String
+  User     User   @relation(fields: [userId], references: [id])
+  Recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+}
+
+model Recipe {
+  id               String            @id @default(uuid())
+  createdAt        DateTime          @default(now()) @map(name: "created_at")
+  updatedAt        DateTime          @updatedAt @map(name: "updated_at")
+  name             String
+  description      String
+  imageSrc         String
+  tags             Tag[]
+  cookTime         Int
+  servings         Int
+  complexity       Complexity
+  Instructions     Instructions?
+  RecipeIngredient RecipeIngredient[]
+  Favorites        Favorite[]
+}
+
+model Ingredient {
+  id               String            @id @default(uuid())
+  name             String
+  unit             Unit
+  Macros           Macros?
+  RecipeIngredient RecipeIngredient[]
+}
+
+model RecipeIngredient {
+  id           String     @id @default(uuid())
+  quantity     Float
+  recipeId     String
+  ingredientId String
+  Recipe       Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  Ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+}
+
+model Macros {
+  id           String     @id @default(uuid())
+  calories     Int
+  carbs        Int
+  protein      Int
+  fats         Int
+  ingredientId String     @unique
+  Ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+}
+
+model Instructions {
+  id    String   @id @default(uuid())
+  steps String[]
+  tips  String[]
+  Recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId String @unique
+}
+
+enum Unit {
+  GRAMS_100
+  KILOGRAMS
+  MILLILITERS_100
+  LITERS
+  TEASPOONS
+  TABLESPOONS
+  CUPS
+  PIECES
+}
+
+enum Complexity {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum Tag {
+  BREAKFAST
+  LUNCH
+  DINNER
+  DESSERT
+  SNACK
+  DRINK
+  VEGETARIAN
+  VEGAN
+  GLUTEN_FREE
+  DAIRY_FREE
+  NUT_FREE
+  HIGH_PROTEIN
+  LOW_CARB
+  LOW_FAT
 }
