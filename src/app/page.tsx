@@ -1,6 +1,8 @@
 import RecipeImageCarousel from '@shared/components/shared/RecipeImageCarousel';
 import db from '@shared/lib/prisma';
 
+export const revalidate = 300;
+
 export default async function Home() {
   const recipes = await db.recipe.findMany();
   recipes.map(recipe => (recipe.imageSrc = require(`../../public/recipes/${recipe.imageSrc}`).default));
