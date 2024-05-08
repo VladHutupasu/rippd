@@ -47,7 +47,7 @@ model Recipe {
 
 model Ingredient {
   id               String            @id @default(uuid())
-  name             String
+  name             String            @unique
   unit             Unit
   Macros           Macros?
   RecipeIngredient RecipeIngredient[]
@@ -69,7 +69,7 @@ model Macros {
   protein      Int
   fats         Int
   ingredientId String     @unique
-  Ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  Ingredient   Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
 }
 
 model Instructions {

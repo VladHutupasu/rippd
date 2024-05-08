@@ -1,13 +1,14 @@
 'use client';
 
 import { Ingredient, Tag } from '@prisma/client';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { getIngredients } from '../actions/get-ingredients';
 import { createNewRecipe } from '../actions/new-recipe';
 
 export default function NewRecipe() {
   const [availableIngredients, setAvailableIngredients] = useState<Ingredient[]>([]);
   const [selectedIngredients, setSelectedIngredients] = useState([{ id: '', quantity: 0 }]);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -43,13 +44,15 @@ export default function NewRecipe() {
   return (
     <form
       id="new-recipe-form"
+      ref={formRef}
       className="flex flex-col gap-2"
-      action={(formData: FormData) => {
+      action={async (formData: FormData) => {
         formData.delete('ingredients');
         selectedIngredients.map((selectedIngredient, index) => {
           formData.append('ingredients', JSON.stringify(selectedIngredient));
         });
-        createNewRecipe(formData);
+        await createNewRecipe(formData);
+        formRef.current?.reset();
       }}
     >
       <label className="form-control w-full max-w-sm">

@@ -17,9 +17,8 @@ export async function createNewRecipe(formData: FormData) {
       complexity: formData.get('complexity') as Complexity,
       Instructions: {
         create: {
-          // TODO: Fix split for instructions and tips
-          steps: formData.get('instructions')?.toString().split('/n') as string[],
-          tips: formData.get('tips')?.toString().split('/n') as string[],
+          steps: formData.get('instructions')?.toString().split('\r\n') as string[],
+          tips: formData.get('tips')?.toString().split('\r\n') as string[],
         },
       },
       RecipeIngredient: {

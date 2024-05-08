@@ -1,10 +1,22 @@
+'use client';
+
 import { Unit } from '@prisma/client';
+import { useRef } from 'react';
 import { createNewIngredient } from '../actions/new-ingredient';
 
-// IngredientForm.tsx
 export default function NewIngredient() {
+  const formRef = useRef<HTMLFormElement>(null);
+
   return (
-    <form id="new-ingredient-form" className="flex flex-col gap-2" action={createNewIngredient}>
+    <form
+      id="new-ingredient-form"
+      ref={formRef}
+      className="flex flex-col gap-2"
+      action={async (formData: FormData) => {
+        await createNewIngredient(formData);
+        formRef.current?.reset();
+      }}
+    >
       <label className="form-control w-full max-w-sm">
         <div className="label">
           <span className="label-text">Ingredient Name:</span>
