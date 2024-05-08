@@ -1,6 +1,7 @@
 import RecipeImageCarousel from '@shared/components/shared/RecipeImageCarousel';
 import db from '@shared/lib/prisma';
 
+// Revalidate HOME PAGE every 5 minutes
 export const revalidate = 300;
 
 export default async function Home() {

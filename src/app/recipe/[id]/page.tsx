@@ -42,13 +42,13 @@ export default async function RecipeDetails({ params }: { params: { id: string }
   console.log(recipe.Instructions?.steps);
   recipe.imageSrc = require(`../../../../public/recipes/${recipe.imageSrc}`).default;
 
-  //Calculate total macros
+  // Calculate total macros
   const macros = recipe.RecipeIngredient.reduce(
     (acc, curr) => {
       if (curr.Ingredient.Macros) {
-        acc.carbs += curr.Ingredient.Macros.carbs;
-        acc.protein += curr.Ingredient.Macros.protein;
-        acc.fats += curr.Ingredient.Macros.fats;
+        acc.carbs += curr.Ingredient.Macros.carbs * curr.quantity;
+        acc.protein += curr.Ingredient.Macros.protein * curr.quantity;
+        acc.fats += curr.Ingredient.Macros.fats * curr.quantity;
       }
       return acc;
     },
