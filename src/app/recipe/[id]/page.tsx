@@ -52,6 +52,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
         acc.carbs += curr.Ingredient.Macros.carbs * curr.quantity;
         acc.protein += curr.Ingredient.Macros.protein * curr.quantity;
         acc.fats += curr.Ingredient.Macros.fats * curr.quantity;
+        // console.log(curr.Ingredient.name + ' ' + curr.Ingredient.Macros.calories * curr.quantity);
       }
       return acc;
     },
@@ -164,8 +165,8 @@ export default async function RecipeDetails({ params }: { params: { id: string }
       <h1 className="font-semibold text-lg sm:text-xl xl:text-3xl mt-8 mb-4">Tips</h1>
       <ul className="flex flex-col gap-2 sm:gap-4">
         {recipe.Instructions?.tips.map((tip, index) => (
-          <li key={index} className="flex items-center gap-2 font-light text-sm">
-            <LightBulbIcon className="h-4 w-4 inline-block" />
+          <li key={index} className="flex gap-2 font-light text-sm">
+            <LightBulbIcon className="h-4 w-4 pt-1 inline-block" />
             {tip}
           </li>
         ))}
