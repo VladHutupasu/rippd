@@ -8,14 +8,22 @@ export default function RecipeImageCarousel({ recipes }: { recipes: Recipe[] }) 
       <div className="carousel carousel-center max-w-full p-4 pl-0 space-x-4 bg-transparent rounded-box">
         {recipes.map(recipe => (
           <div key={recipe.id} className="carousel-item ">
-            {/* TODO: Use image id here */}
             <Link href={`recipe/${recipe.id}`} className="flex flex-col gap-1">
               <Image
                 src={recipe.imageSrc}
-                className="rounded-box object-cover w-44 sm:w-56 h-full"
+                className="rounded-box object-cover h-44 sm:hidden"
                 alt={recipe.description}
                 placeholder="blur"
-                height={299}
+                width={176}
+                height={176}
+              />
+
+              <Image
+                src={recipe.imageSrc}
+                className="rounded-box object-cover h-56 hidden sm:block"
+                alt={recipe.description}
+                placeholder="blur"
+                height={224}
                 width={224}
               />
               {/* TODO: Fix word wrap if this is too long */}

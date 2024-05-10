@@ -59,24 +59,32 @@ export default async function RecipeDetails({ params }: { params: { id: string }
     { calories: 0, carbs: 0, protein: 0, fats: 0 }
   );
 
-  //TODO: Fix Ipad Pro <main> margins/padding
   return (
     <section>
       <div className="flex flex-col lg:flex-row gap-8">
         <Image
           src={recipe.imageSrc}
-          className="h-80 w-full lg:h-96 lg:w-96 object-cover rounded-lg"
+          className="h-72 w-full object-cover absolute inset-0 mt-28 sm:hidden"
           alt="Cod fillet"
-          width={192}
-          height={192}
-          priority
+          height={288}
+          width={414}
+          placeholder="blur"
         />
 
-        <div className="flex flex-col justify-between">
+        <Image
+          src={recipe.imageSrc}
+          className="h-96 w-full lg:w-80 min-w-80 object-cover rounded-box hidden sm:block"
+          alt="Cod fillet"
+          height={384}
+          width={320}
+          placeholder="blur"
+        />
+
+        <div className="flex flex-col max-sm:pt-[20rem] justify-between">
           <h1 className="text-3xl lg:text-6xl text-left font-bold text-base-content opacity-80 mb-4">{recipe.name}</h1>
 
           {/* Info */}
-          <div className="stats stats-horizontal font-light shadow h-20 sm:h-24 2xl:h-28 flex mb-2">
+          <div className="stats stats-horizontal font-light shadow h-20 sm:h-24 2xl:h-28 flex">
             <div className="stat px-3 sm:px-8 flex-1 min-w-24">
               <div className="stat-title text-xs sm:text-sm xl:text-base">
                 Calories <BeakerIcon className="h-4 w-4 inline-block" />
