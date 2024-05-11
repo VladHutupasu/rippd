@@ -84,7 +84,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
 
         <Image
           src={recipe.imageSrc}
-          className="h-96 w-full lg:w-80 min-w-80 object-cover rounded-box hidden sm:block"
+          className="h-96 w-full lg:w-80 min-w-80 object-cover rounded-md hidden sm:block"
           alt="Cod fillet"
           height={384}
           width={320}
@@ -94,51 +94,61 @@ export default async function RecipeDetails({ params }: { params: { id: string }
         <div className="flex flex-col max-sm:pt-[20rem] justify-between gap-2">
           <h1 className="text-3xl lg:text-6xl text-left font-bold text-base-content opacity-80 mb-2">{recipe.name}</h1>
 
-          {/* Info */}
-          <div className="stats stats-horizontal font-light shadow h-20 sm:h-24 2xl:h-28 flex">
-            <div className="stat px-3 sm:px-8 flex-1 min-w-24">
-              <div className="stat-title text-xs sm:text-sm xl:text-base">
-                Calories <BeakerIcon className="h-4 w-4 inline-block" />
+          <div className="flex flex-col gap-3 sm:gap-4 xl:gap-8">
+            {/* Info */}
+            <div className="stats stats-horizontal font-light shadow h-20 sm:h-24 2xl:h-28 flex">
+              <div className="stat px-3 sm:px-8 flex-1 min-w-24">
+                <div className="stat-title text-xs sm:text-sm xl:text-base">
+                  Calories <BeakerIcon className="h-4 w-4 inline-block" />
+                </div>
+                <div className="stat-value text-lg sm:text-xl xl:text-3xl">
+                  {Math.ceil(macros.calories / recipe.servings)}
+                </div>
               </div>
-              <div className="stat-value text-lg sm:text-xl xl:text-3xl">{Math.ceil(macros.calories)}</div>
+
+              <div className="stat px-3 sm:px-8 flex-1 min-w-24">
+                <div className="stat-title text-xs sm:text-sm xl:text-base">
+                  Time <ClockIcon className="h-4 w-4 inline-block" />
+                </div>
+                <div className="stat-value text-lg sm:text-xl xl:text-3xl">{recipe.cookTime}</div>
+              </div>
+
+              <div className="stat px-3 sm:px-8 flex-1 min-w-24">
+                <div className="stat-title text-xs sm:text-sm xl:text-base">
+                  Complexity <Cog8ToothIcon className="h-4 w-4 inline-block" />
+                </div>
+                <div className="stat-value text-lg sm:text-xl xl:text-3xl">{recipe.complexity}</div>
+              </div>
             </div>
 
-            <div className="stat px-3 sm:px-8 flex-1 min-w-24">
-              <div className="stat-title text-xs sm:text-sm xl:text-base">
-                Time <ClockIcon className="h-4 w-4 inline-block" />
+            {/* Macros */}
+            <div className="stats stats-horizontal font-light shadow h-20 sm:h-24 2xl:h-28 flex">
+              <div className="stat px-3 sm:px-8 flex-1 min-w-24">
+                <div className="stat-title text-xs sm:text-sm xl:text-base">
+                  Carbs <BoltIcon className="h-4 w-4 inline-block" />
+                </div>
+                <div className="stat-value text-lg sm:text-xl xl:text-3xl">
+                  {Math.ceil(macros.carbs / recipe.servings)}
+                </div>
               </div>
-              <div className="stat-value text-lg sm:text-xl xl:text-3xl">{recipe.cookTime}</div>
-            </div>
 
-            <div className="stat px-3 sm:px-8 flex-1 min-w-24">
-              <div className="stat-title text-xs sm:text-sm xl:text-base">
-                Complexity <Cog8ToothIcon className="h-4 w-4 inline-block" />
+              <div className="stat px-3 sm:px-8 flex-1 min-w-24">
+                <div className="stat-title text-xs sm:text-sm xl:text-base">
+                  Protein <FireIcon className="h-4 w-4 inline-block" />
+                </div>
+                <div className="stat-value text-lg sm:text-xl xl:text-3xl">
+                  {Math.ceil(macros.protein / recipe.servings)}
+                </div>
               </div>
-              <div className="stat-value text-lg sm:text-xl xl:text-3xl">{recipe.complexity}</div>
-            </div>
-          </div>
 
-          {/* Macros */}
-          <div className="stats stats-horizontal font-light shadow h-20 sm:h-24 2xl:h-28 flex">
-            <div className="stat px-3 sm:px-8 flex-1 min-w-24">
-              <div className="stat-title text-xs sm:text-sm xl:text-base">
-                Carbs <BoltIcon className="h-4 w-4 inline-block" />
+              <div className="stat px-3 sm:px-8 flex-1 min-w-24">
+                <div className="stat-title text-xs sm:text-sm xl:text-base">
+                  Fats <RocketLaunchIcon className="h-4 w-4 inline-block" />
+                </div>
+                <div className="stat-value text-lg sm:text-xl xl:text-3xl">
+                  {Math.ceil(macros.fats / recipe.servings)}
+                </div>
               </div>
-              <div className="stat-value text-lg sm:text-xl xl:text-3xl">{Math.ceil(macros.carbs)}</div>
-            </div>
-
-            <div className="stat px-3 sm:px-8 flex-1 min-w-24">
-              <div className="stat-title text-xs sm:text-sm xl:text-base">
-                Protein <FireIcon className="h-4 w-4 inline-block" />
-              </div>
-              <div className="stat-value text-lg sm:text-xl xl:text-3xl">{Math.ceil(macros.protein)}</div>
-            </div>
-
-            <div className="stat px-3 sm:px-8 flex-1 min-w-24">
-              <div className="stat-title text-xs sm:text-sm xl:text-base">
-                Fats <RocketLaunchIcon className="h-4 w-4 inline-block" />
-              </div>
-              <div className="stat-value text-lg sm:text-xl xl:text-3xl">{Math.ceil(macros.fats)}</div>
             </div>
           </div>
         </div>
@@ -148,7 +158,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
       <div className="mt-4">
         {recipe.tags.map(tag => (
           <div key={tag} className="badge badge-sm badge-primary text-base-100 mr-2">
-            {tag.toLowerCase()}
+            {tag.toLowerCase().replace(/_/g, ' ')}
           </div>
         ))}
       </div>

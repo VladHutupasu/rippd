@@ -5,13 +5,13 @@ import Link from 'next/link';
 export default function RecipeImageCarousel({ recipes }: { recipes: Recipe[] }) {
   return (
     <>
-      <div className="carousel carousel-center max-w-full p-4 pl-0 space-x-4 bg-transparent rounded-box">
+      <div className="carousel carousel-center max-w-full p-4 pl-0 space-x-4 bg-transparent">
         {recipes.map(recipe => (
           <div key={recipe.id} className="carousel-item ">
             <Link href={`recipe/${recipe.id}`} className="flex flex-col gap-1">
               <Image
                 src={recipe.imageSrc}
-                className="rounded-box object-cover h-44 sm:hidden"
+                className="rounded-md object-cover h-44 sm:hidden"
                 alt={recipe.description}
                 placeholder="blur"
                 width={176}
@@ -20,7 +20,7 @@ export default function RecipeImageCarousel({ recipes }: { recipes: Recipe[] }) 
 
               <Image
                 src={recipe.imageSrc}
-                className="rounded-box object-cover h-56 hidden sm:block"
+                className="rounded-md object-cover h-56 hidden sm:block"
                 alt={recipe.description}
                 placeholder="blur"
                 height={224}
