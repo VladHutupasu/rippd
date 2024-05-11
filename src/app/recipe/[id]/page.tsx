@@ -10,6 +10,7 @@ import {
 import { formatQuantity } from '@shared/components/shared/models/QuantityUnitTransformations';
 import db from '@shared/lib/prisma';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default async function RecipeDetails({ params }: { params: { id: string } }) {
   const recipeId = params.id;
@@ -41,7 +42,6 @@ export default async function RecipeDetails({ params }: { params: { id: string }
     );
   }
 
-  console.log(recipe.Instructions?.steps);
   recipe.imageSrc = require(`../../../../public/recipes/${recipe.imageSrc}`).default;
 
   // Calculate total macros
@@ -61,10 +61,21 @@ export default async function RecipeDetails({ params }: { params: { id: string }
 
   return (
     <section>
+      <div className="text-xs font-light opacity-60 breadcrumbs sm:mb-4">
+        <ul>
+          <li>
+            <Link href={'/'}>Home</Link>
+          </li>
+          <li>
+            <Link href={'/'}>Recipes</Link>
+          </li>
+          <li>{recipe.name}</li>
+        </ul>
+      </div>
       <div className="flex flex-col lg:flex-row gap-8">
         <Image
           src={recipe.imageSrc}
-          className="h-72 w-full object-cover absolute inset-0 mt-28 sm:hidden"
+          className="h-72 w-full object-cover absolute inset-0 mt-[8.7rem] sm:hidden"
           alt="Cod fillet"
           height={288}
           width={414}
@@ -80,8 +91,8 @@ export default async function RecipeDetails({ params }: { params: { id: string }
           placeholder="blur"
         />
 
-        <div className="flex flex-col max-sm:pt-[20rem] justify-between">
-          <h1 className="text-3xl lg:text-6xl text-left font-bold text-base-content opacity-80 mb-4">{recipe.name}</h1>
+        <div className="flex flex-col max-sm:pt-[20rem] justify-between gap-2">
+          <h1 className="text-3xl lg:text-6xl text-left font-bold text-base-content opacity-80 mb-2">{recipe.name}</h1>
 
           {/* Info */}
           <div className="stats stats-horizontal font-light shadow h-20 sm:h-24 2xl:h-28 flex">
@@ -151,7 +162,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
         {recipe.RecipeIngredient.map(recipe => {
           return { ...recipe.Ingredient, quantityAndUnit: formatQuantity(recipe.quantity, recipe.Ingredient.unit) };
         }).map(ingredient => (
-          <label key={ingredient.id} className="label cursor-pointer justify-between">
+          <label key={ingredient.id} className="label cursor-pointer justify-between px-0">
             <div className="flex gap-2 font-light text-sm">
               <input type="checkbox" className="checkbox checkbox-sm checkbox-primary" />
               <span className="opacity-60">{ingredient.quantityAndUnit}</span>

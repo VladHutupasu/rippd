@@ -27,7 +27,7 @@ export default function RecipeImageCarousel({ recipes }: { recipes: Recipe[] }) 
                 width={224}
               />
               {/* TODO: Fix word wrap if this is too long */}
-              <p className="font-semibold text-center text-sm">{recipe.name}</p>
+              <p className="font-normal text-center text-sm">{recipe.name}</p>
             </Link>
           </div>
         ))}
