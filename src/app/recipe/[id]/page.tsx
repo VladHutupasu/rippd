@@ -101,7 +101,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Calories <BeakerIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value text-lg sm:text-xl xl:text-3xl">
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">
                   {Math.ceil(macros.calories / recipe.servings)}
                 </div>
               </div>
@@ -110,14 +110,14 @@ export default async function RecipeDetails({ params }: { params: { id: string }
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Time <ClockIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value text-lg sm:text-xl xl:text-3xl">{recipe.cookTime}</div>
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{recipe.cookTime}</div>
               </div>
 
               <div className="stat px-3 sm:px-8 flex-1 min-w-24">
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Complexity <Cog8ToothIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value text-lg sm:text-xl xl:text-3xl">{recipe.complexity}</div>
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{recipe.complexity}</div>
               </div>
             </div>
 
@@ -127,7 +127,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Carbs <BoltIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value text-lg sm:text-xl xl:text-3xl">
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">
                   {Math.ceil(macros.carbs / recipe.servings)}
                 </div>
               </div>
@@ -136,7 +136,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Protein <FireIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value text-lg sm:text-xl xl:text-3xl">
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">
                   {Math.ceil(macros.protein / recipe.servings)}
                 </div>
               </div>
@@ -145,7 +145,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Fats <RocketLaunchIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value text-lg sm:text-xl xl:text-3xl">
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">
                   {Math.ceil(macros.fats / recipe.servings)}
                 </div>
               </div>
@@ -164,8 +164,8 @@ export default async function RecipeDetails({ params }: { params: { id: string }
       </div>
 
       {/* Ingredients */}
-      <div className="flex flex-col gap-1 font-semibold mt-8 mb-4">
-        <h1 className="font-semibold text-lg sm:text-xl xl:text-3xl">Ingredients</h1>
+      <div className="flex flex-col gap-1 font-bold mt-8 mb-4">
+        <h1 className="text-lg sm:text-xl xl:text-3xl">Ingredients</h1>
         <h1 className="opacity-60 text-sm font-light">{recipe.servings} serving(s)</h1>
       </div>
       <div className="flex flex-col">
@@ -182,7 +182,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
         ))}
       </div>
 
-      <h1 className="font-semibold text-lg sm:text-xl xl:text-3xl mt-8 mb-4">Instructions</h1>
+      <h1 className="font-bold text-lg sm:text-xl xl:text-3xl mt-8 mb-4">Instructions</h1>
       <div className="flex flex-col gap-2 sm:gap-4">
         {recipe.Instructions?.steps.map((step, index) => (
           <p key={index} className="font-light text-sm">
@@ -191,7 +191,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
         ))}
       </div>
 
-      <h1 className="font-semibold text-lg sm:text-xl xl:text-3xl mt-8 mb-4">Tips</h1>
+      <h1 className="font-bold text-lg sm:text-xl xl:text-3xl mt-8 mb-4">Tips</h1>
       <ul className="flex flex-col gap-2 sm:gap-4">
         {recipe.Instructions?.tips.map((tip, index) => (
           <li key={index} className="flex gap-2 font-light text-sm">

@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className={inter.className + ' min-h-full bg-[url("/background.webp")] m-0 p-0 box-border'}>
         <Header />
-        <main className="flex flex-col w-11/12 sm:w-4/5 lg:w-9/12 2xl:w-7/12 mx-auto pb-10 pt-24 sm:pt-36">
+        <main className="flex flex-col w-11/12 sm:w-4/5 lg:w-9/12 2xl:w-7/12 mx-auto pb-10 pt-24 sm:pt-28">
           {children}
         </main>
       </body>
