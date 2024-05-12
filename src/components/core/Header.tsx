@@ -66,7 +66,7 @@ export default function Header() {
               rippd
               <Image src="/logo.svg" className="w-5 h-5" alt="logo" width={20} height={20} />
             </Link>
-            <p className="uppercase text-neutral-content text-xs font-semibold -mt-2">healthy recipes</p>
+            <p className="uppercase opacity-50 text-xs font-semibold -mt-2">healthy recipes</p>
           </div>
           <div className="navbar-end">
             <label
