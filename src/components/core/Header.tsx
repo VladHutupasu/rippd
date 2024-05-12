@@ -8,7 +8,6 @@ import { useEffect, useRef, useState } from 'react';
 export default function Header() {
   const isFirstRender = useRef(true);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
-  const searchIconRef = useRef<HTMLLabelElement | null>(null);
 
   const [shouldFocus, setShouldFocus] = useState<null | boolean>(null);
   const [searchValue, setSearchValue] = useState('');
@@ -16,22 +15,6 @@ export default function Header() {
   const clearSearch = () => {
     setSearchValue('');
   };
-
-  useEffect(() => {
-    if (!searchIconRef.current) return;
-
-    const labelRef = searchIconRef.current;
-
-    const handleClick = () => {
-      setShouldFocus(prev => !prev);
-    };
-    labelRef.addEventListener('click', handleClick);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      labelRef.removeEventListener('click', handleClick);
-    };
-  }, []);
 
   useEffect(() => {
     // Prevent modal to show up on component mount
@@ -70,10 +53,10 @@ export default function Header() {
           </div>
           <div className="navbar-end">
             <label
-              ref={searchIconRef}
               htmlFor="my-drawer"
               aria-label="open sidebar"
               className="btn btn-circle btn-ghost"
+              onClick={() => setShouldFocus(prev => !prev)}
             >
               <MagnifyingGlassIcon strokeWidth={2} className="h-5 w-5" />
             </label>
