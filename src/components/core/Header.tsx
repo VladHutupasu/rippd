@@ -66,7 +66,7 @@ export default function Header() {
           <div className="join min-w-full">
             <input
               ref={searchInputRef}
-              className="input input-bordered join-item flex-1 focus:outline-none"
+              className="input input-bordered join-item flex-1 text-sm focus:outline-none"
               placeholder="Today I'm cooking.."
             />
             <button className="btn join-item rounded-r-full bg-primary text-base-200">Search</button>
