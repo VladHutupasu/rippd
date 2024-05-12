@@ -96,7 +96,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
 
           <div className="flex flex-col gap-3 sm:gap-4 xl:gap-8">
             {/* Info */}
-            <div className="stats stats-horizontal font-light shadow h-20 sm:h-24 2xl:h-28 flex">
+            <div className="stats stats-horizontal font-light drop-shadow h-20 sm:h-24 2xl:h-28 flex">
               <div className="stat px-3 sm:px-8 flex-1 min-w-24">
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Calories <BeakerIcon className="h-4 w-4 inline-block" />
@@ -122,7 +122,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
             </div>
 
             {/* Macros */}
-            <div className="stats stats-horizontal font-light shadow h-20 sm:h-24 2xl:h-28 flex">
+            <div className="stats stats-horizontal font-light drop-shadow h-20 sm:h-24 2xl:h-28 flex">
               <div className="stat px-3 sm:px-8 flex-1 min-w-24">
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Carbs <BoltIcon className="h-4 w-4 inline-block" />

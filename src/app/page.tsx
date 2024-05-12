@@ -31,7 +31,7 @@ export default async function Home() {
       </section>
 
       <section>
-        <h1 className="font-bold text-xl">Crowd&apos; favs</h1>
+        <h1 className="font-bold text-xl">Crowd&apos;s favs</h1>
         <RecipeImageCarousel recipes={recipes} />
       </section>
     </section>

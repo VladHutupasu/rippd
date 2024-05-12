@@ -7,7 +7,7 @@ export default function RecipeImageCarousel({ recipes }: { recipes: Recipe[] }) 
     <>
       <div className="carousel carousel-center max-w-full p-4 pl-0 space-x-4 bg-transparent">
         {recipes.map(recipe => (
-          <div key={recipe.id} className="carousel-item ">
+          <div key={recipe.id} className="carousel-item">
             <Link href={`recipe/${recipe.id}`} className="flex flex-col gap-1">
               <Image
                 src={recipe.imageSrc}
