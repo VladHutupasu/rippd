@@ -3,15 +3,17 @@
 import { Bars3Icon, BellIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Header() {
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const [searching, setSearching] = useState(false);
 
-  const focusSearchInput = () => {
-    console.log('focus', searchInputRef.current);
-    setTimeout(() => searchInputRef.current?.focus(), 200);
-  };
+  useEffect(() => {
+    if (searchInputRef.current) {
+      setTimeout(() => searchInputRef.current?.focus(), 200);
+    }
+  }, [searching]);
 
   return (
     <div className="drawer">
@@ -35,7 +37,7 @@ export default function Header() {
               htmlFor="my-drawer"
               aria-label="open sidebar"
               className="btn btn-circle btn-ghost"
-              onClick={focusSearchInput}
+              onClick={() => setSearching(!searching)}
             >
               <MagnifyingGlassIcon strokeWidth={2} className="h-5 w-5" />
             </label>
@@ -59,7 +61,7 @@ export default function Header() {
           <div className="join min-w-full">
             <input
               ref={searchInputRef}
-              className="input input-bordered text-sm join-item flex-1 focus:outline-none"
+              className="input input-bordered join-item flex-1 focus:outline-none"
               placeholder="Today I'm cooking.."
             />
             <button className="btn join-item rounded-r-full bg-primary text-base-200">Search</button>
