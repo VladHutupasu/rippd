@@ -96,7 +96,7 @@ export default function Header() {
           </label>
 
           <div className="join">
-            <label className="input input-bordered join-item flex items-center gap-2 focus-within:outline-none">
+            <label className="input input-bordered w-full join-item flex items-center gap-2 focus-within:outline-none">
               <input
                 ref={searchInputRef}
                 type="text"
