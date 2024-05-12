@@ -31,7 +31,10 @@ export default function Header() {
             </label>
           </div>
           <div className="navbar-center flex-col">
-            <Link href="/" className="btn btn-ghost text-2xl text-primary font-semibold hover:bg-transparent">
+            <Link
+              href="/"
+              className="btn btn-ghost no-animation text-2xl text-primary font-semibold hover:bg-transparent"
+            >
               rippd
               <Image src="/logo.svg" className="w-5 h-5" alt="logo" width={20} height={20} />
             </Link>
@@ -60,13 +63,13 @@ export default function Header() {
         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
 
         <div className="menu p-4 min-h-full min-w-full sm:min-w-96 bg-base-200 gap-4">
-          <label htmlFor="my-drawer" aria-label="close sidebar" className="btn btn-circle btn-ghost">
+          <label htmlFor="my-drawer" aria-label="close sidebar" className="btn btn-sm btn-circle btn-ghost">
             <XMarkIcon strokeWidth={2} className="h-5 w-5" />
           </label>
           <div className="join">
             <input
               ref={searchInputRef}
-              className="input input-bordered join-item focus:outline-none"
+              className="input input-bordered w-full join-item focus:outline-none"
               placeholder="Today I'm cooking.."
             />
             <button className="btn join-item rounded-r-full bg-primary text-base-200">Search</button>
@@ -74,10 +77,10 @@ export default function Header() {
           {/* Sidebar content here */}
           <ul>
             <li>
-              <a>Newest recipes</a>
+              <a className="pl-2">Newest recipes</a>
             </li>
             <li>
-              <a>Crowd&apos;s favs</a>
+              <a className="pl-2">Crowd&apos;s favs</a>
             </li>
           </ul>
         </div>
