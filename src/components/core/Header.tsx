@@ -63,10 +63,10 @@ export default function Header() {
           <label htmlFor="my-drawer" aria-label="close sidebar" className="btn btn-circle btn-ghost">
             <XMarkIcon strokeWidth={2} className="h-5 w-5" />
           </label>
-          <div className="join min-w-full">
+          <div className="join w-full">
             <input
               ref={searchInputRef}
-              className="input input-bordered join-item flex-1 text-sm focus:outline-none"
+              className="input input-bordered join-item grow focus:outline-none"
               placeholder="Today I'm cooking.."
             />
             <button className="btn join-item rounded-r-full bg-primary text-base-200">Search</button>
