@@ -1,6 +1,8 @@
 'use client';
 
 import { Bars3Icon, BellIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Recipe } from '@prisma/client';
+import { getRecipeByName } from '@shared/app/actions/get-recipe';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
@@ -11,10 +13,7 @@ export default function Header() {
 
   const [shouldFocus, setShouldFocus] = useState<null | boolean>(null);
   const [searchValue, setSearchValue] = useState('');
-
-  const clearSearch = () => {
-    setSearchValue('');
-  };
+  const [searchResults, setSearchResults] = useState<Recipe[]>([]);
 
   useEffect(() => {
     // Prevent modal to show up on component mount
@@ -78,7 +77,17 @@ export default function Header() {
             <XMarkIcon strokeWidth={2} className="h-5 w-5" />
           </label>
 
-          <div className="join">
+          <form
+            className="join"
+            action={async () => {
+              if (!searchValue.trim()) return;
+              console.log('searching', searchValue);
+
+              const recipes = await getRecipeByName(searchValue);
+              recipes.map(recipe => (recipe.imageSrc = require(`../../../public/recipes/${recipe.imageSrc}`).default));
+              setSearchResults(recipes);
+            }}
+          >
             <label className="input input-bordered w-full join-item flex items-center gap-2 focus-within:outline-none">
               <input
                 ref={searchInputRef}
@@ -89,20 +98,51 @@ export default function Header() {
                 onChange={e => setSearchValue(e.target.value)}
               />
 
-              {searchValue && <XMarkIcon className="h-5 w-5 cursor-pointer" onClick={clearSearch} />}
+              {searchValue && (
+                <XMarkIcon
+                  className="h-5 w-5 cursor-pointer"
+                  onClick={() => {
+                    setSearchValue('');
+                    setSearchResults([]);
+                  }}
+                />
+              )}
             </label>
-            <button className="btn btn-primary join-item rounded-r-full text-base-200">Search</button>
-          </div>
+            <button type="submit" className="btn btn-primary join-item rounded-r-full text-base-200">
+              Search
+            </button>
+          </form>
 
           {/* Sidebar content here */}
-          <ul>
-            <li>
-              <a className="pl-2">Newest recipes</a>
-            </li>
-            <li>
-              <a className="pl-2">Crowd&apos;s favs</a>
-            </li>
-          </ul>
+          {searchResults.length > 0 && (
+            <div className="flex flex-col items-start gap-4">
+              {searchResults.map(recipe => (
+                <Link key={recipe.id} href={`recipe/${recipe.id}`}>
+                  <div className="flex flex-col h-56 w-56">
+                    <Image
+                      src={recipe.imageSrc}
+                      alt={recipe.description}
+                      height={224}
+                      width={224}
+                      placeholder="blur"
+                      className="grow h-20 object-cover rounded-md"
+                    />
+                    <h2 className="text-md font-medium">{recipe.name}</h2>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+          {searchResults.length === 0 && (
+            <ul>
+              <li>
+                <a className="pl-2">Newest recipes</a>
+              </li>
+              <li>
+                <a className="pl-2">Crowd&apos;s favs</a>
+              </li>
+            </ul>
+          )}
         </div>
       </div>
     </div>

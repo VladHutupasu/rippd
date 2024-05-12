@@ -18,7 +18,7 @@ export default function LatestRecipeCard({ recipe }: { recipe: Recipe }) {
         </figure>
         <div className="card-body">
           <h2 className="card-title font-bold">New!</h2>
-          <p className="font-normal opacity-60">{recipe.name}</p>
+          <p className="font-medium opacity-60">{recipe.name}</p>
         </div>
       </div>
     </Link>
