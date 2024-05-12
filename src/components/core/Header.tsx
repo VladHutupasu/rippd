@@ -23,7 +23,6 @@ export default function Header() {
     }
 
     if (searchInputRef.current && shouldFocus !== null) {
-      console.log('focusing', shouldFocus);
       searchInputRef.current.focus();
       // Used for focusing input on desktop
       setTimeout(() => searchInputRef.current?.focus(), 200);
@@ -72,16 +71,15 @@ export default function Header() {
       <div className="drawer-side z-50">
         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
 
-        <div className="menu p-4 min-h-full min-w-full sm:min-w-96 bg-base-200 gap-4">
+        <div className="menu p-4 min-h-full min-w-full sm:min-w-96 sm:w-96 bg-base-200 gap-4">
           <label htmlFor="my-drawer" aria-label="close sidebar" className="btn btn-sm btn-circle btn-ghost">
             <XMarkIcon strokeWidth={2} className="h-5 w-5" />
           </label>
 
           <form
-            className="join"
+            className="join pb-3"
             action={async () => {
               if (!searchValue.trim()) return;
-              console.log('searching', searchValue);
 
               const recipes = await getRecipeByName(searchValue);
               recipes.map(recipe => (recipe.imageSrc = require(`../../../public/recipes/${recipe.imageSrc}`).default));
@@ -95,7 +93,12 @@ export default function Header() {
                 className="w-full"
                 placeholder="Today I'm cooking.."
                 value={searchValue}
-                onChange={e => setSearchValue(e.target.value)}
+                onChange={e => {
+                  setSearchValue(e.target.value);
+                  if (!e.target.value.trim()) {
+                    setSearchResults([]);
+                  }
+                }}
               />
 
               {searchValue && (
@@ -115,17 +118,17 @@ export default function Header() {
 
           {/* Sidebar content here */}
           {searchResults.length > 0 && (
-            <div className="flex flex-col items-start gap-4">
+            <div className="flex flex-wrap gap-4 justify-between">
               {searchResults.map(recipe => (
                 <Link key={recipe.id} href={`recipe/${recipe.id}`}>
-                  <div className="flex flex-col h-56 w-56">
+                  <div key={recipe.id} className="flex flex-col gap-1 max-w-40">
                     <Image
                       src={recipe.imageSrc}
                       alt={recipe.description}
-                      height={224}
-                      width={224}
+                      height={160}
+                      width={160}
                       placeholder="blur"
-                      className="grow h-20 object-cover rounded-md"
+                      className="h-40 w-40 object-cover rounded-md"
                     />
                     <h2 className="text-md font-medium">{recipe.name}</h2>
                   </div>
