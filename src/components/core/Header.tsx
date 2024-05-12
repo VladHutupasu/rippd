@@ -11,6 +11,11 @@ export default function Header() {
   const searchIconRef = useRef<HTMLLabelElement | null>(null);
 
   const [shouldFocus, setShouldFocus] = useState<null | boolean>(null);
+  const [searchValue, setSearchValue] = useState('');
+
+  const clearSearch = () => {
+    setSearchValue('');
+  };
 
   useEffect(() => {
     if (!searchIconRef.current) return;
@@ -38,7 +43,8 @@ export default function Header() {
     if (searchInputRef.current && shouldFocus !== null) {
       console.log('focusing', shouldFocus);
       searchInputRef.current.focus();
-      // setTimeout(() => searchInputRef.current?.focus(), 200);
+      // Used for focusing input on desktop
+      setTimeout(() => searchInputRef.current?.focus(), 200);
     }
   }, [shouldFocus]);
 
@@ -88,14 +94,23 @@ export default function Header() {
           <label htmlFor="my-drawer" aria-label="close sidebar" className="btn btn-sm btn-circle btn-ghost">
             <XMarkIcon strokeWidth={2} className="h-5 w-5" />
           </label>
+
           <div className="join">
-            <input
-              ref={searchInputRef}
-              className="input input-bordered w-full join-item focus:outline-none"
-              placeholder="Today I'm cooking.."
-            />
+            <label className="input input-bordered join-item w-full flex items-center gap-2 focus-within:outline-none">
+              <input
+                ref={searchInputRef}
+                type="text"
+                className="grow"
+                placeholder="Today I'm cooking.."
+                value={searchValue}
+                onChange={e => setSearchValue(e.target.value)}
+              />
+
+              {searchValue && <XMarkIcon className="h-5 w-5 cursor-pointer" onClick={clearSearch} />}
+            </label>
             <button className="btn btn-primary join-item rounded-r-full text-base-200">Search</button>
           </div>
+
           {/* Sidebar content here */}
           <ul>
             <li>
