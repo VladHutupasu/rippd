@@ -6,35 +6,39 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 export default function Header() {
+  const isFirstRender = useRef(true);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
-  // const [searching, setSearching] = useState(false);
-  const [shouldFocus, setShouldFocus] = useState(false);
+  const searchIconRef = useRef<HTMLLabelElement | null>(null);
+
+  const [shouldFocus, setShouldFocus] = useState<null | boolean>(null);
 
   useEffect(() => {
-    //TODO: get ref from context instead of querying the DOM
-    const searchIcon = document.getElementById('search-icon');
-    if (!searchIcon) return;
+    if (!searchIconRef.current) return;
+
+    const labelRef = searchIconRef.current;
 
     const handleClick = () => {
       setShouldFocus(prev => !prev);
     };
-    searchIcon.addEventListener('click', handleClick);
+    labelRef.addEventListener('click', handleClick);
 
     // Clean up the event listener when the component unmounts
     return () => {
-      searchIcon.removeEventListener('click', handleClick);
+      labelRef.removeEventListener('click', handleClick);
     };
   }, []);
 
-  // useEffect(() => {
-  //   setShouldFocus(true);
-  // }, [searching]);
-
   useEffect(() => {
-    if (searchInputRef.current) {
-      console.log('focusing');
+    // Prevent modal to show up on component mount
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    if (searchInputRef.current && shouldFocus !== null) {
+      console.log('focusing', shouldFocus);
       searchInputRef.current.focus();
-      setTimeout(() => searchInputRef.current?.focus(), 200);
+      // setTimeout(() => searchInputRef.current?.focus(), 200);
     }
   }, [shouldFocus]);
 
@@ -59,7 +63,12 @@ export default function Header() {
             <p className="uppercase text-neutral-content text-xs font-semibold -mt-2">healthy recipes</p>
           </div>
           <div className="navbar-end">
-            <label id="search-icon" htmlFor="my-drawer" aria-label="open sidebar" className="btn btn-circle btn-ghost">
+            <label
+              ref={searchIconRef}
+              htmlFor="my-drawer"
+              aria-label="open sidebar"
+              className="btn btn-circle btn-ghost"
+            >
               <MagnifyingGlassIcon strokeWidth={2} className="h-5 w-5" />
             </label>
             <button className="btn btn-ghost btn-circle">
