@@ -7,16 +7,34 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function Header() {
   const searchInputRef = useRef<HTMLInputElement | null>(null);
-  const [searching, setSearching] = useState(false);
+  // const [searching, setSearching] = useState(false);
   const [shouldFocus, setShouldFocus] = useState(false);
 
   useEffect(() => {
-    setShouldFocus(true);
-  }, [searching]);
+    //TODO: get ref from context instead of querying the DOM
+    const searchIcon = document.getElementById('search-icon');
+    if (!searchIcon) return;
+
+    const handleClick = () => {
+      setShouldFocus(prev => !prev);
+    };
+    searchIcon.addEventListener('click', handleClick);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      searchIcon.removeEventListener('click', handleClick);
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   setShouldFocus(true);
+  // }, [searching]);
 
   useEffect(() => {
-    if (shouldFocus) {
-      searchInputRef.current?.focus();
+    if (searchInputRef.current) {
+      console.log('focusing');
+      searchInputRef.current.focus();
+      setTimeout(() => searchInputRef.current?.focus(), 200);
     }
   }, [shouldFocus]);
 
@@ -41,12 +59,7 @@ export default function Header() {
             <p className="uppercase text-neutral-content text-xs font-semibold -mt-2">healthy recipes</p>
           </div>
           <div className="navbar-end">
-            <label
-              htmlFor="my-drawer"
-              aria-label="open sidebar"
-              className="btn btn-circle btn-ghost"
-              onClick={() => setSearching(!searching)}
-            >
+            <label id="search-icon" htmlFor="my-drawer" aria-label="open sidebar" className="btn btn-circle btn-ghost">
               <MagnifyingGlassIcon strokeWidth={2} className="h-5 w-5" />
             </label>
             <button className="btn btn-ghost btn-circle">
@@ -72,7 +85,7 @@ export default function Header() {
               className="input input-bordered w-full join-item focus:outline-none"
               placeholder="Today I'm cooking.."
             />
-            <button className="btn join-item rounded-r-full bg-primary text-base-200">Search</button>
+            <button className="btn btn-primary join-item rounded-r-full text-base-200">Search</button>
           </div>
           {/* Sidebar content here */}
           <ul>
