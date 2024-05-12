@@ -24,8 +24,18 @@ export const formatQuantity = (quantity: number, unit: Unit): string => {
   if (['GRAMS_100', 'MILLILITERS_100'].includes(unit)) {
     quantity *= 100;
   }
-  let fraction = fractionMap[quantity] || quantity;
+
+  let wholeNumber = Math.floor(quantity);
+  let fraction = quantity % 1;
+  let fractionString = fractionMap[fraction] || fraction;
+
   const abbreviation = unitMap[unit] || unit;
 
-  return `${fraction} ${abbreviation}`;
+  if (wholeNumber === 0) {
+    return `${fractionString} ${abbreviation}`;
+  } else if (fraction === 0) {
+    return `${wholeNumber} ${abbreviation}`;
+  } else {
+    return `${wholeNumber} ${fractionString} ${abbreviation}`;
+  }
 };
