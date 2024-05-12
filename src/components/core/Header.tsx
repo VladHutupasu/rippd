@@ -8,12 +8,17 @@ import { useEffect, useRef, useState } from 'react';
 export default function Header() {
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const [searching, setSearching] = useState(false);
+  const [shouldFocus, setShouldFocus] = useState(false);
 
   useEffect(() => {
-    if (searchInputRef.current) {
-      setTimeout(() => searchInputRef.current?.focus(), 200);
-    }
+    setShouldFocus(true);
   }, [searching]);
+
+  useEffect(() => {
+    if (shouldFocus) {
+      searchInputRef.current?.focus();
+    }
+  }, [shouldFocus]);
 
   return (
     <div className="drawer">

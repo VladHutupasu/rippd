@@ -5,6 +5,7 @@ import Link from 'next/link';
 export default function LatestRecipeCard({ recipe }: { recipe: Recipe }) {
   return (
     <Link href={`recipe/${recipe.id}`}>
+      {/* TODO: check console warning image size */}
       <div className="card card-compact w-full h-72 bg-base-100 drop-shadow rounded-md">
         <figure>
           <Image
