@@ -1,15 +1,16 @@
 'use client';
 
-import { Bars3Icon, BellIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Recipe } from '@prisma/client';
 import { getRecipeByName } from '@shared/app/actions/get-recipe';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
-export default function Header() {
+export default function Header({ children }: { children: React.ReactNode }) {
   const isFirstRender = useRef(true);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const drawerRef = useRef<HTMLInputElement | null>(null);
 
   const [shouldFocus, setShouldFocus] = useState<null | boolean>(null);
   const [searchValue, setSearchValue] = useState('');
@@ -31,12 +32,12 @@ export default function Header() {
 
   return (
     <div className="drawer">
-      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+      <input ref={drawerRef} id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content w-full flex fixed top-0 z-50">
         <div className="navbar px-2 md:px-32 bg-[url('/background.webp')]">
           <div className="navbar-start">
             <label htmlFor="my-drawer" aria-label="open sidebar" className="btn btn-circle btn-ghost">
-              <Bars3Icon className="h-5 w-5" />
+              <Bars3Icon strokeWidth={2} className="h-5 w-5" />
             </label>
           </div>
           <div className="navbar-center flex-col">
@@ -49,7 +50,7 @@ export default function Header() {
             </Link>
             <p className="uppercase opacity-50 text-xs font-semibold -mt-2">healthy recipes</p>
           </div>
-          <div className="navbar-end">
+          <div className="navbar-end gap-2">
             <label
               htmlFor="my-drawer"
               aria-label="open sidebar"
@@ -58,18 +59,15 @@ export default function Header() {
             >
               <MagnifyingGlassIcon strokeWidth={2} className="h-5 w-5" />
             </label>
-            <button className="btn btn-ghost btn-circle">
-              <div className="indicator">
-                <BellIcon strokeWidth={2} className="h-5 w-5" />
-                <span className="badge badge-xs badge-primary indicator-item"></span>
-              </div>
-            </button>
+
+            {/* SignIn server component */}
+            {children}
           </div>
         </div>
       </div>
 
       <div className="drawer-side z-50">
-        <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+        <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay" />
 
         <div className="menu p-4 min-h-full min-w-full sm:min-w-96 sm:w-96 bg-base-200 gap-4">
           <label htmlFor="my-drawer" aria-label="close sidebar" className="btn btn-sm btn-circle btn-ghost">
@@ -120,7 +118,13 @@ export default function Header() {
           {searchResults.length > 0 && (
             <div className="flex flex-wrap gap-4 justify-between">
               {searchResults.map(recipe => (
-                <Link key={recipe.id} href={`recipe/${recipe.id}`}>
+                <Link
+                  key={recipe.id}
+                  href={`/recipe/${recipe.id}`}
+                  onClick={() => {
+                    if (drawerRef.current) drawerRef.current.checked = false;
+                  }}
+                >
                   <div key={recipe.id} className="flex flex-col gap-1 max-w-40">
                     <Image
                       src={recipe.imageSrc}
