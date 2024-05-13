@@ -1,8 +1,9 @@
 'use client';
 
-import { Bars3Icon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, HeartIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Recipe } from '@prisma/client';
 import { getRecipeByName } from '@shared/app/actions/get-recipe';
+import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
@@ -50,7 +51,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
             </Link>
             <p className="uppercase opacity-50 text-xs font-semibold -mt-2">healthy recipes</p>
           </div>
-          <div className="navbar-end gap-2">
+          <div className="navbar-end sm:gap-2">
             <label
               htmlFor="my-drawer"
               aria-label="open sidebar"
@@ -109,7 +110,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
                 />
               )}
             </label>
-            <button type="submit" className="btn btn-primary join-item rounded-r-full text-base-200">
+            <button type="submit" className="btn btn-primary join-item text-base-200">
               Search
             </button>
           </form>
@@ -141,14 +142,24 @@ export default function Header({ children }: { children: React.ReactNode }) {
             </div>
           )}
           {searchResults.length === 0 && (
-            <ul>
-              <li>
-                <a className="pl-2">Newest recipes</a>
-              </li>
-              <li>
-                <a className="pl-2">Crowd&apos;s favs</a>
-              </li>
-            </ul>
+            <>
+              <ul>
+                <li>
+                  <a className="pl-2 gap-1">
+                    Saved recipes <HeartIcon strokeWidth={2} className="h-5 w-5 text-error" />
+                  </a>
+                </li>
+                <li>
+                  <a className="pl-2">Newest recipes</a>
+                </li>
+                <li>
+                  <a className="pl-2">Crowd&apos;s favs</a>
+                </li>
+              </ul>
+              <button className="btn btn-primary btn-sm text-base-200 mt-auto" onClick={() => signOut()}>
+                Sign out
+              </button>
+            </>
           )}
         </div>
       </div>

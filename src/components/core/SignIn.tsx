@@ -1,5 +1,5 @@
 import { UserIcon } from '@heroicons/react/24/outline';
-import signInGoogle from '@shared/app/actions/sign-in';
+import signInAction from '@shared/app/actions/sign-in';
 import { auth } from '@shared/lib/auth';
 import Image from 'next/image';
 
@@ -17,10 +17,10 @@ export default async function SignIn() {
   }
 
   return (
-    <form action={signInGoogle}>
-      <button className="btn btn-ghost" type="submit">
+    <form action={signInAction}>
+      <button className="btn btn-ghost font-medium" type="submit">
         <UserIcon strokeWidth={2} className="h-5 w-5" />
-        <span className="hidden sm:block">Login</span>
+        <span className="hidden sm:block">Sign in</span>
       </button>
     </form>
   );
