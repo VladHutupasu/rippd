@@ -156,6 +156,7 @@ export default function Header({ children }: { children: React.ReactNode }) {
                   <a className="pl-2">Crowd&apos;s favs</a>
                 </li>
               </ul>
+              {/* TODO: Handle SignIn and SignOut same way either client or server side */}
               <button className="btn btn-primary btn-sm text-base-200 mt-auto" onClick={() => signOut()}>
                 Sign out
               </button>
