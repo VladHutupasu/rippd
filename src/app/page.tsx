@@ -16,8 +16,8 @@ export default async function Home() {
 
   return (
     <section className="flex flex-col gap-8 md:gap-14">
-      <section className="absolute inset-x-0 bg-primary text-base-100 px-3 py-5 opacity-90">
-        <h1 className="text-lg font-bold">Welcome 👋</h1>
+      <section className="absolute inset-x-0 bg-primary text-base-100 px-3 py-5">
+        <h1 className="text-xl font-semibold">Welcome 👋</h1>
         <p className="text-sm pt-2 font-medium">Discover healthy recipes for your everyday life</p>
       </section>
 
