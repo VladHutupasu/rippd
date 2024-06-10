@@ -3,12 +3,11 @@
 import { Bars3Icon, HeartIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Recipe } from '@prisma/client';
 import { getRecipeByName } from '@shared/app/actions/get-recipe';
-import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
-export default function Header({ children }: { children: React.ReactNode }) {
+export default function Header() {
   const isFirstRender = useRef(true);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const drawerRef = useRef<HTMLInputElement | null>(null);
@@ -60,9 +59,6 @@ export default function Header({ children }: { children: React.ReactNode }) {
             >
               <MagnifyingGlassIcon strokeWidth={2} className="h-5 w-5" />
             </label>
-
-            {/* SignIn server component */}
-            {children}
           </div>
         </div>
       </div>
@@ -156,10 +152,6 @@ export default function Header({ children }: { children: React.ReactNode }) {
                   <a className="pl-2">Crowd&apos;s favs</a>
                 </li>
               </ul>
-              {/* TODO: Handle SignIn and SignOut same way either client or server side */}
-              <button className="btn btn-primary btn-sm text-base-200 mt-auto" onClick={() => signOut()}>
-                Sign out
-              </button>
             </>
           )}
         </div>
