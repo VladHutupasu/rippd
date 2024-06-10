@@ -62,6 +62,8 @@ export default function Header({ children }: { children: React.ReactNode }) {
             </label>
 
             {/* SignIn server component */}
+            {/* The SignIn component makes all app dynamic rendered */}
+            {/* If you remove the SignIn component from the children, app builds static pages, otherwise makes all dynamic */}
             {children}
           </div>
         </div>
