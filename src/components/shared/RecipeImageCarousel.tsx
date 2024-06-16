@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function RecipeImageCarousel({ recipes }: { recipes: Recipe[] }) {
   return (
     <>
-      <div className="flex justify-end opacity-60">
+      <div className="flex justify-end opacity-40">
         <Image src="/images/swipe-left.svg" alt="swipe-left" width={25} height={25} />
       </div>
       <div className="carousel carousel-center max-w-full p-4 pl-0 space-x-4 bg-transparent">
