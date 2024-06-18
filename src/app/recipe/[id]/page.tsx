@@ -92,7 +92,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
         />
 
         <div className="flex flex-col max-sm:pt-[20rem] justify-between gap-2">
-          <h1 className="text-3xl lg:text-6xl text-left font-bold text-base-content opacity-80 mb-2">{recipe.name}</h1>
+          <h1 className="text-3xl lg:text-6xl text-left font-bold text-base-content mb-2">{recipe.name}</h1>
 
           <div className="flex flex-col gap-3 sm:gap-4 xl:gap-8">
             {/* Info */}

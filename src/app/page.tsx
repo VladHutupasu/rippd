@@ -1,4 +1,4 @@
-import LatestRecipeCard from '@shared/components/shared/LatestRecipeCard';
+import Hero from '@shared/components/shared/Hero';
 import RecipeImageCarousel from '@shared/components/shared/RecipeImageCarousel';
 import db from '@shared/lib/prisma';
 
@@ -16,24 +16,11 @@ export default async function Home() {
 
   return (
     <section className="flex flex-col gap-8 md:gap-14">
-      <section className="absolute inset-x-0 bg-primary text-base-100 px-3 py-5">
-        <h1 className="text-xl font-semibold">Welcome 👋</h1>
-        <p className="text-sm pt-2 font-medium">Discover healthy recipes for your everyday life</p>
-      </section>
+      <Hero recipe={recipes[0]} />
 
-      <section className="pt-32">
-        <LatestRecipeCard recipe={recipes[0]} />
-      </section>
+      <RecipeImageCarousel title="Newest recipes" recipes={recipes} />
 
-      <section>
-        <h1 className="font-bold text-xl">Newest recipes</h1>
-        <RecipeImageCarousel recipes={recipes} />
-      </section>
-
-      <section>
-        <h1 className="font-bold text-xl">Crowd&apos;s favs</h1>
-        <RecipeImageCarousel recipes={recipes} />
-      </section>
+      <RecipeImageCarousel title="Crowd's favs" recipes={recipes} />
     </section>
   );
 }
