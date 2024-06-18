@@ -1,5 +1,6 @@
 import Hero from '@shared/components/shared/Hero';
 import RecipeImageCarousel from '@shared/components/shared/RecipeImageCarousel';
+import SubHero from '@shared/components/shared/SubHero';
 import db from '@shared/lib/prisma';
 
 // Revalidate HOME PAGE every 5 minutes
@@ -19,6 +20,8 @@ export default async function Home() {
       <Hero recipe={recipes[0]} />
 
       <RecipeImageCarousel title="Newest recipes" recipes={recipes} />
+
+      <SubHero />
 
       <RecipeImageCarousel title="Crowd's favs" recipes={recipes} />
     </section>

@@ -6,13 +6,13 @@ import HeroImage from '../../../public/isometric/hero.png';
 export default function Hero({ recipe }: { recipe: Recipe }) {
   return (
     <div className="hero bg-transparent">
-      <div className="hero-content p-0 flex-col lg:flex-row-reverse">
+      <div className="hero-content p-0 gap-0 flex-col lg:flex-row-reverse">
         <Image
           src={HeroImage}
-          className="rounded-md w-[300px] h-[300px] lg:hidden"
+          className="rounded-md w-[250px] h-[250px] lg:hidden"
           alt="Recipe description"
-          width={300}
-          height={300}
+          width={250}
+          height={250}
         />
 
         <Image
@@ -30,7 +30,7 @@ export default function Hero({ recipe }: { recipe: Recipe }) {
             achieving your fitness goals.
           </p>
           <Link href={`recipe/${recipe.id}`}>
-            <button className="btn btn-primary mt-auto">Check out our latest recipe</button>
+            <button className="btn btn-neutral">Check out our latest recipe</button>
           </Link>
         </div>
       </div>

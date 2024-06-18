@@ -6,7 +6,7 @@ export default function RecipeImageCarousel({ recipes, title }: { recipes: Recip
   return (
     <section>
       <div className="flex justify-between">
-        <h1 className="font-bold text-xl">{title}</h1>
+        <h1 className="font-bold text-xl lg:text-2xl">{title}</h1>
         <Image className=" opacity-40" src="/images/swipe-left.svg" alt="swipe-left" width={20} height={20} />
       </div>
       <div className="carousel carousel-center max-w-full pt-2 space-x-4 bg-transparent">
@@ -31,7 +31,7 @@ export default function RecipeImageCarousel({ recipes, title }: { recipes: Recip
                 width={224}
               />
               {/* TODO: Fix word wrap if this is too long */}
-              <p className="font-medium text-center text-sm">{recipe.name}</p>
+              <p className="font-medium text-sm lg:text-base text-center">{recipe.name}</p>
             </Link>
           </div>
         ))}
