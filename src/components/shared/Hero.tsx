@@ -1,11 +1,11 @@
 import { Recipe } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
-import HeroImage from '../../../public/isometric/hero.png';
+import HeroImage from '../../../public/images/isometric/hero.png';
 
 export default function Hero({ recipe }: { recipe: Recipe }) {
   return (
-    <div className="hero bg-transparent">
+    <div className="hero bg-base-200 p-8 rounded-md">
       <div className="hero-content p-0 gap-0 flex-col lg:flex-row-reverse">
         <Image
           src={HeroImage}

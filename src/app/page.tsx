@@ -23,7 +23,10 @@ export default async function Home() {
 
       <SubHero />
 
-      <RecipeImageCarousel title="Crowd's favs" recipes={recipes} />
+      <RecipeImageCarousel
+        title="Crowd's favs"
+        recipes={[...recipes].sort((a, b) => a.createdAt.getMilliseconds() - b.createdAt.getMilliseconds())}
+      />
     </section>
   );
 }

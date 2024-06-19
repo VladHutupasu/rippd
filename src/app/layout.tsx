@@ -1,3 +1,4 @@
+import Footer from '@shared/components/core/Footer';
 import Header from '@shared/components/core/Header';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
@@ -25,6 +26,7 @@ export default function RootLayout({
         <main className="flex flex-col w-11/12 sm:w-4/5 lg:w-9/12 2xl:w-7/12 mx-auto pb-10 pt-24 sm:pt-28">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );

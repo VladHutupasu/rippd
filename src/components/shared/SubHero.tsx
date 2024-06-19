@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import HeroImage from '../../../public/isometric/heart.png';
+import HeroImage from '../../../public/images/isometric/heart.png';
 
 export default function SubHero() {
   return (
-    <div className="hero bg-transparent">
+    <div className="hero bg-base-200 p-8 rounded-md">
       <div className="hero-content p-0 flex-col lg:flex-row">
         <Image
           src={HeroImage}
