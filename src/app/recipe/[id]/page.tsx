@@ -11,35 +11,37 @@ import { formatQuantity } from '@shared/components/shared/models/QuantityUnitTra
 import db from '@shared/lib/prisma';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 export default async function RecipeDetails({ params }: { params: { id: string } }) {
   const recipeId = params.id;
+  let recipe;
 
-  const recipe = await db.recipe.findUnique({
-    where: {
-      id: recipeId,
-    },
-    include: {
-      Instructions: true,
-      RecipeIngredient: {
-        include: {
-          Ingredient: {
-            include: {
-              Macros: true,
+  try {
+    recipe = await db.recipe.findUnique({
+      where: {
+        id: recipeId,
+      },
+      include: {
+        Instructions: true,
+        RecipeIngredient: {
+          include: {
+            Ingredient: {
+              include: {
+                Macros: true,
+              },
             },
           },
         },
       },
-    },
-  });
+    });
+  } catch (error: unknown) {
+    console.error('Unable to fetch recipe', error);
+  }
 
   //TODO: re-route to not found page
   if (!recipe) {
-    return (
-      <div className="flex flex-col flex-grow items-center justify-center h-screen -mt-28 sm:-mt-36 text-3xl">
-        Recipe not found
-      </div>
-    );
+    redirect('/not-found');
   }
 
   recipe.imageSrc = require(`../../../../public/recipes/${recipe.imageSrc}`).default;

@@ -24,7 +24,7 @@ export default function Hero({ recipe }: { recipe: Recipe }) {
         />
 
         <div className="h-full">
-          <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold">Protein packed healthy recipes</h1>
+          <h1 className="text-3xl lg:text-5xl xl:text-6xl font-bold">Protein packed healthy recipes</h1>
           <p className="py-4 md:py-6">
             Discover delicious, high-protein meals that support your healthy lifestyle. Perfect for fueling your day and
             achieving your fitness goals.

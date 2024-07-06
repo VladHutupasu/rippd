@@ -22,7 +22,7 @@ export default function SubHero() {
         />
 
         <div className="h-full">
-          <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold">Eat healthy, stay strong</h1>
+          <h1 className="text-3xl lg:text-5xl xl:text-6xl font-bold">Eat healthy, stay strong</h1>
           <p className="py-4 md:py-6">
             We strive to provide high-protein meals designed to keep your body healthy and energized. Perfect for
             maintaining a strong, active lifestyle.
