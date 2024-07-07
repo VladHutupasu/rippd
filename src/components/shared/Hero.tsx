@@ -1,7 +1,7 @@
 import { Recipe } from '@prisma/client';
+import HeroImage from '@public/images/isometric/hero.png';
 import Image from 'next/image';
 import Link from 'next/link';
-import HeroImage from '../../../public/images/isometric/hero.png';
 
 export default function Hero({ recipe }: { recipe: Recipe }) {
   return (

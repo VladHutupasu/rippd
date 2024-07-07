@@ -1,5 +1,5 @@
+import BlogImage from '@public/images/blog/why-is-protein-important.png';
 import Image from 'next/image';
-import BlogImage from '../../../../public/images/blog/why-is-protein-important.png';
 
 export default function WhyIsProteinImportant() {
   return (

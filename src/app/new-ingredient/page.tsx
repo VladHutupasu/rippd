@@ -1,8 +1,8 @@
 'use client';
 
+import { createNewIngredient } from '@actions/new-ingredient';
 import { Unit } from '@prisma/client';
 import { useRef } from 'react';
-import { createNewIngredient } from '../actions/new-ingredient';
 
 export default function NewIngredient() {
   const formRef = useRef<HTMLFormElement>(null);

@@ -13,7 +13,7 @@ export default async function Home() {
       createdAt: 'desc',
     },
   });
-  recipes.map(recipe => (recipe.imageSrc = require(`../../public/recipes/${recipe.imageSrc}`).default));
+  recipes.map(recipe => (recipe.imageSrc = require(`@public/images/recipes/${recipe.imageSrc}`).default));
 
   return (
     <section className="flex flex-col gap-8 md:gap-14">

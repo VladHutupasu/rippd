@@ -1,11 +1,11 @@
 import { Recipe } from '@prisma/client';
+import SwipeLeftIcon from '@public/images/swipe-left.svg';
+import GlutenFreeIcon from '@public/images/tags/gluten-free.svg';
+import HighProteinIcon from '@public/images/tags/high-protein.svg';
+import VeganIcon from '@public/images/tags/vegan.svg';
+import VegetarianIcon from '@public/images/tags/vegetarian.svg';
 import Image from 'next/image';
 import Link from 'next/link';
-import SwipeLeftIcon from '../../../public/images/swipe-left.svg';
-import GlutenFreeIcon from '../../../public/images/tags/gluten-free.svg';
-import HighProteinIcon from '../../../public/images/tags/high-protein.svg';
-import VeganIcon from '../../../public/images/tags/vegan.svg';
-import VegetarianIcon from '../../../public/images/tags/vegetarian.svg';
 
 export default function RecipeImageCarousel({ recipes, title }: { recipes: Recipe[]; title: string }) {
   return (

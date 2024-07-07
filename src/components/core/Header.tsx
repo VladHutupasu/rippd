@@ -81,7 +81,7 @@ export default function Header() {
               if (!searchValue.trim()) return;
 
               const recipes = await getRecipeByName(searchValue);
-              recipes.map(recipe => (recipe.imageSrc = require(`../../../public/recipes/${recipe.imageSrc}`).default));
+              recipes.map(recipe => (recipe.imageSrc = require(`@public/images/recipes/${recipe.imageSrc}`).default));
               setSearchResults(recipes);
             }}
           >

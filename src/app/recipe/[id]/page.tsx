@@ -44,7 +44,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
     redirect('/not-found');
   }
 
-  recipe.imageSrc = require(`../../../../public/recipes/${recipe.imageSrc}`).default;
+  recipe.imageSrc = require(`@public/images/recipes/${recipe.imageSrc}`).default;
 
   // Calculate total macros
   const macros = recipe.RecipeIngredient.reduce(

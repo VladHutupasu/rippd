@@ -1,9 +1,9 @@
 'use client';
 
+import { getIngredients } from '@actions/get-ingredients';
+import { createNewRecipe } from '@actions/new-recipe';
 import { Ingredient, Tag } from '@prisma/client';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { getIngredients } from '../actions/get-ingredients';
-import { createNewRecipe } from '../actions/new-recipe';
 
 export default function NewRecipe() {
   const [availableIngredients, setAvailableIngredients] = useState<Ingredient[]>([]);
