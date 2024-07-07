@@ -162,6 +162,11 @@ export default function Header() {
                       Why is Protein important?
                     </Link>
                   </li>
+                  <li>
+                    <Link href={`/blog/why-control-glucose-spikes`} onClick={() => closeDrawer()}>
+                      Why control Glucose Spikes?
+                    </Link>
+                  </li>
                 </ul>
               </section>
             </>
