@@ -7,8 +7,8 @@ import {
   LightBulbIcon,
   RocketLaunchIcon,
 } from '@heroicons/react/24/outline';
-import { formatQuantity } from '@shared/components/shared/models/QuantityUnitTransformations';
-import db from '@shared/lib/prisma';
+import db from '@lib/prisma';
+import { formatQuantity } from '@shared/models/QuantityUnitTransformations';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';

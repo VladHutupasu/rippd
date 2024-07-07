@@ -1,7 +1,7 @@
 'use server';
 
+import db from '@lib/prisma';
 import { Unit } from '@prisma/client';
-import db from '@shared/lib/prisma';
 
 // TODO: Handle errors
 export async function createNewIngredient(formData: FormData) {

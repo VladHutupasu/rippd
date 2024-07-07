@@ -1,7 +1,7 @@
-import Hero from '@shared/components/shared/Hero';
-import RecipeImageCarousel from '@shared/components/shared/RecipeImageCarousel';
-import SubHero from '@shared/components/shared/SubHero';
-import db from '@shared/lib/prisma';
+import db from '@lib/prisma';
+import Hero from '@shared/Hero';
+import RecipeImageCarousel from '@shared/RecipeImageCarousel';
+import SubHero from '@shared/SubHero';
 
 // Revalidate HOME PAGE every 5 minutes
 export const revalidate = 300;

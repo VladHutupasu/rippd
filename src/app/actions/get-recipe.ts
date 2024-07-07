@@ -1,6 +1,6 @@
 'use server';
 
-import db from '@shared/lib/prisma';
+import db from '@lib/prisma';
 
 export async function getRecipeByName(searchValue: string) {
   const recipes = await db.recipe.findMany({

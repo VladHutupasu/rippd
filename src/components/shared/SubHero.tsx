@@ -1,5 +1,5 @@
+import HeroImage from '@public/images/isometric/hero.png';
 import Image from 'next/image';
-import HeroImage from '../../../public/images/isometric/heart.png';
 
 export default function SubHero() {
   return (

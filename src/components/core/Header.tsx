@@ -1,8 +1,8 @@
 'use client';
 
+import { getRecipeByName } from '@actions/get-recipe';
 import { Bars3Icon, HeartIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Recipe } from '@prisma/client';
-import { getRecipeByName } from '@shared/app/actions/get-recipe';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
@@ -29,6 +29,10 @@ export default function Header() {
       setTimeout(() => searchInputRef.current?.focus(), 200);
     }
   }, [shouldFocus]);
+
+  const closeDrawer = () => {
+    if (drawerRef.current) drawerRef.current.checked = false;
+  };
 
   return (
     <div className="drawer">
@@ -115,13 +119,7 @@ export default function Header() {
           {searchResults.length > 0 && (
             <div className="flex flex-wrap gap-4 justify-between">
               {searchResults.map(recipe => (
-                <Link
-                  key={recipe.id}
-                  href={`/recipe/${recipe.id}`}
-                  onClick={() => {
-                    if (drawerRef.current) drawerRef.current.checked = false;
-                  }}
-                >
+                <Link key={recipe.id} href={`/recipe/${recipe.id}`} onClick={() => closeDrawer()}>
                   <div key={recipe.id} className="flex flex-col gap-1 max-w-40">
                     <Image
                       src={recipe.imageSrc}
@@ -139,19 +137,33 @@ export default function Header() {
           )}
           {searchResults.length === 0 && (
             <>
-              <ul>
-                <li>
-                  <a className="pl-2 gap-1">
-                    Saved recipes <HeartIcon strokeWidth={2} className="h-5 w-5 text-error" />
-                  </a>
-                </li>
-                <li>
-                  <a className="pl-2">Newest recipes</a>
-                </li>
-                <li>
-                  <a className="pl-2">Crowd&apos;s favs</a>
-                </li>
-              </ul>
+              <section>
+                <p className="text-lg font-semibold">Recipes</p>
+                <ul>
+                  <li>
+                    <a>
+                      Saved recipes <HeartIcon strokeWidth={2} className="h-5 w-5 text-error" />
+                    </a>
+                  </li>
+                  <li>
+                    <a>Newest recipes</a>
+                  </li>
+                  <li>
+                    <a>Crowd&apos;s favs</a>
+                  </li>
+                </ul>
+              </section>
+
+              <section>
+                <p className="text-lg font-semibold">Blog</p>
+                <ul>
+                  <li>
+                    <Link href={`/blog/why-is-protein-important`} onClick={() => closeDrawer()}>
+                      Why is Protein important?
+                    </Link>
+                  </li>
+                </ul>
+              </section>
             </>
           )}
         </div>

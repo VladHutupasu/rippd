@@ -1,7 +1,7 @@
 'use server';
 
+import db from '@lib/prisma';
 import { Complexity, Tag } from '@prisma/client';
-import db from '@shared/lib/prisma';
 
 export async function createNewRecipe(formData: FormData) {
   const ingredients = formData.getAll('ingredients').map(ingredient => JSON.parse(ingredient as string));

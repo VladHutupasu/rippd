@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="footer footer-center mt-20 p-4 bg-base-200 text-base-content font-medium">
+    <footer className="footer footer-center mt-24 p-3 md:p-4 bg-base-200 text-base-content font-medium">
       <aside>
         <p>
           Copyright © 2024 - All rights reserved by

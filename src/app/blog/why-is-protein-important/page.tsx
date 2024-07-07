@@ -12,7 +12,7 @@ export default function WhyIsProteinImportant() {
           <Image
             src={BlogImage}
             className="rounded-md w-[250px] h-[250px] m-0 lg:hidden"
-            alt="Recipe description"
+            alt="Protein foods"
             width={250}
             height={250}
           />
@@ -20,7 +20,7 @@ export default function WhyIsProteinImportant() {
           <Image
             src={BlogImage}
             className="rounded-md w-[400px] h-[400px] hidden m-0 lg:block"
-            alt="Recipe description"
+            alt="Protein foods"
             width={400}
             height={400}
           />
@@ -81,9 +81,11 @@ export default function WhyIsProteinImportant() {
           </ul>
 
           <p>Here&apos;s a quick code snippet to calculate your daily protein needs:</p>
-          <pre>
-            <code>function calculateProtein(weight)</code>
-          </pre>
+
+          <label className="input input-bordered flex items-center gap-2 w-fit">
+            <input type="number" className="w-20" placeholder="Weight" />
+            <span className="font-semibold">kg</span>
+          </label>
         </div>
       </article>
     </div>
