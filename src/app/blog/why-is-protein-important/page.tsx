@@ -1,3 +1,4 @@
+import ProteinCalculator from '@features/ProteinCalculator';
 import BlogImage from '@public/images/blog/why-is-protein-important.png';
 import BlogPost from '@shared/BlogPost';
 
@@ -51,12 +52,11 @@ export default function WhyIsProteinImportant() {
           your body and support your health goals!
         </p>
 
-        <p>Here&apos;s a quick tool to calculate your daily protein needs:</p>
+        <p>
+          Here&apos;s a quick <span className="font-semibold">tool to calculate your daily protein needs</span>:
+        </p>
 
-        <label className="input input-bordered flex items-center gap-2 w-fit">
-          <input type="number" className="w-20" placeholder="Weight" />
-          <span className="font-semibold">kg</span>
-        </label>
+        <ProteinCalculator />
       </div>
     </BlogPost>
   );
