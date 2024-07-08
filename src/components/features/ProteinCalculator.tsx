@@ -166,11 +166,12 @@ export default function ProteinCalculator() {
         <div className="max-w-md flex flex-col mx-auto mt-3">
           <div className="text-md text-center">
             <p>
-              American Dietetic Association (ADA) recommends <span className="font-semibold">{proteinIntake.ADA}</span>
+              American Dietetic Association (ADA) recommends:
+              <span className="font-semibold block">{proteinIntake.ADA}</span>
             </p>
             <p>
-              World Health Organization (WHO) safe lower limit:{' '}
-              <span className="font-semibold">{proteinIntake.WHO}</span>
+              World Health Organization (WHO) safe lower limit:
+              <span className="font-semibold block">{proteinIntake.WHO}</span>
             </p>
           </div>
 
@@ -180,12 +181,12 @@ export default function ProteinCalculator() {
               setProteinIntake(null);
             }}
           >
-            <ArrowPathRoundedSquareIcon className="h-5 w-5 " />
+            <ArrowPathRoundedSquareIcon className="h-5 w-5" />
             Re-calculate
           </button>
         </div>
       )}
-      <p className="italic text-sm">
+      <p className="italic text-xs mb-0">
         <strong>Disclaimer:</strong> Please note that the results from this calculator are for general guidance only and
         should not be considered medical advice. Consult a healthcare professional for personalized dietary
         recommendations.

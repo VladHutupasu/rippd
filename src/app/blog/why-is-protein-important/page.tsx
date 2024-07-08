@@ -1,6 +1,6 @@
-import ProteinCalculator from '@features/ProteinCalculator';
 import BlogImage from '@public/images/blog/why-is-protein-important.png';
 import BlogPost from '@shared/BlogPost';
+import Link from 'next/link';
 
 export default function WhyIsProteinImportant() {
   return (
@@ -53,10 +53,9 @@ export default function WhyIsProteinImportant() {
         </p>
 
         <p>
-          Here&apos;s a quick <span className="font-semibold">tool to calculate your daily protein needs</span>:
+          👉&nbsp;
+          <Link href={`/blog/protein-calculator`}>Check out our tool to calculate your daily protein needs</Link>
         </p>
-
-        <ProteinCalculator />
       </div>
     </BlogPost>
   );
