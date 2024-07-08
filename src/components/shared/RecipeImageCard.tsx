@@ -7,15 +7,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function RecipeImageCard({ recipe, size }: { recipe: Recipe; size: 'small' | 'normal' }) {
-  const mobileScreenImageSize = size === 'small' ? 170 : 208;
   return (
     <Link
       href={`/recipe/${recipe.id}`}
-      className={`flex flex-col items-start gap-1 max-w-[${mobileScreenImageSize}px] sm:max-w-[256px]`}
+      className={`flex flex-col items-start gap-1 max-w-[${size === 'small' ? 170 : 208}px] sm:max-w-[256px]`}
     >
       <Image
         src={recipe.imageSrc}
-        className={`rounded-md object-cover h-[${mobileScreenImageSize}px] w-[${mobileScreenImageSize}px] sm:hidden`}
+        className={`rounded-md object-cover h-[${size === 'small' ? 170 : 208}px] w-[${
+          size === 'small' ? 170 : 208
+        }px] sm:hidden`}
         alt={recipe.description}
         placeholder="blur"
         width={208}
