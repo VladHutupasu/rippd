@@ -10,13 +10,15 @@ export default function RecipeImageCard({ recipe, size }: { recipe: Recipe; size
   return (
     <Link
       href={`/recipe/${recipe.id}`}
-      className={`flex flex-col items-start gap-1 max-w-[${size === 'small' ? 170 : 208}px] sm:max-w-[256px]`}
+      className={`flex flex-col items-start gap-1 ${
+        size === 'small' ? 'max-w-[170px]' : 'max-w-[208px]'
+      } sm:max-w-[256px]`}
     >
       <Image
         src={recipe.imageSrc}
-        className={`rounded-md object-cover h-[${size === 'small' ? 170 : 208}px] w-[${
-          size === 'small' ? 170 : 208
-        }px] sm:hidden`}
+        className={`rounded-md object-cover ${size === 'small' ? 'h-[170px]' : 'h-[208px]'} ${
+          size === 'small' ? 'w-[170px]' : 'w-[208px]'
+        } sm:hidden`}
         alt={recipe.description}
         placeholder="blur"
         width={208}
