@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   description: 'Healthy recipes',
 };
 
+// TODO: SEO - https://dminhvu.com/post/nextjs-seo
 export default function RootLayout({
   children,
 }: Readonly<{

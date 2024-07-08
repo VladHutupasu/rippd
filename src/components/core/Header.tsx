@@ -1,7 +1,7 @@
 'use client';
 
 import { getRecipeByName } from '@actions/get-recipe';
-import { Bars3Icon, HeartIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Recipe } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -140,16 +140,20 @@ export default function Header() {
               <section>
                 <p className="text-lg font-semibold">Recipes</p>
                 <ul>
-                  <li>
+                  {/* <li>
                     <a>
                       Saved recipes <HeartIcon strokeWidth={2} className="h-5 w-5 text-error" />
                     </a>
+                  </li> */}
+                  <li>
+                    <Link href="/recipes/newest" onClick={() => closeDrawer()}>
+                      Newest recipes
+                    </Link>
                   </li>
                   <li>
-                    <a>Newest recipes</a>
-                  </li>
-                  <li>
-                    <a>Crowd&apos;s favs</a>
+                    <Link href="/recipes/crowds-favs" onClick={() => closeDrawer()}>
+                      Crowd&apos;s favs
+                    </Link>
                   </li>
                 </ul>
               </section>
@@ -167,9 +171,20 @@ export default function Header() {
                       Why control Glucose Spikes?
                     </Link>
                   </li>
+                </ul>
+              </section>
+
+              <section>
+                <p className="text-lg font-semibold">Useful</p>
+                <ul>
                   <li>
                     <Link href={`/blog/protein-calculator`} onClick={() => closeDrawer()}>
                       Protein Calculator
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={`/blog/pantry-must-haves`} onClick={() => closeDrawer()}>
+                      Pantry Must-Haves: High Protein Foods
                     </Link>
                   </li>
                 </ul>

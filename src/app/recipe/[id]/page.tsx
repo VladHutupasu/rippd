@@ -63,6 +63,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
 
   return (
     <section>
+      {/* TODO: General component for this */}
       <div className="text-xs font-light opacity-60 breadcrumbs sm:mb-4">
         <ul>
           <li>
