@@ -57,6 +57,11 @@ export default function ProteinCalculatorTool() {
           Incorporating these protein-rich foods into your diet can help you meet your daily protein needs and support
           your fitness goals.
         </p>
+
+        <p>
+          👉&nbsp;
+          <Link href={`/blog/pantry-must-haves`}>Check out our post about Pantry Must-Haves: High Protein Foods</Link>
+        </p>
       </div>
     </BlogPost>
   );
