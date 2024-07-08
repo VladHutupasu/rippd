@@ -167,6 +167,11 @@ export default function Header() {
                       Why control Glucose Spikes?
                     </Link>
                   </li>
+                  <li>
+                    <Link href={`/blog/protein-calculator`} onClick={() => closeDrawer()}>
+                      Protein Calculator
+                    </Link>
+                  </li>
                 </ul>
               </section>
             </>
