@@ -15,7 +15,7 @@ export default function RecipeImageCard({ recipe, size }: { recipe: Recipe; size
     >
       <Image
         src={recipe.imageSrc}
-        className={`rounded-md object-cover h-[${mobileScreenImageSize}px] sm:hidden`}
+        className={`rounded-md object-cover h-[${mobileScreenImageSize}px] w-[${mobileScreenImageSize}px] sm:hidden`}
         alt={recipe.description}
         placeholder="blur"
         width={208}
@@ -24,7 +24,7 @@ export default function RecipeImageCard({ recipe, size }: { recipe: Recipe; size
 
       <Image
         src={recipe.imageSrc}
-        className="rounded-md object-cover h-[256px] hidden sm:block"
+        className="rounded-md object-cover h-[256px] w-[256px] hidden sm:block"
         alt={recipe.description}
         placeholder="blur"
         height={256}
