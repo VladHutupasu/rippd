@@ -111,7 +111,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
         <Image
           src={recipe.imageSrc}
           className="h-72 w-full object-cover absolute inset-0 mt-[8.7rem] sm:hidden"
-          alt="Cod fillet"
+          alt={recipe.description}
           height={288}
           width={414}
           placeholder="blur"
@@ -120,7 +120,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
         <Image
           src={recipe.imageSrc}
           className="h-96 w-full lg:w-80 min-w-80 object-cover rounded-md hidden sm:block"
-          alt="Cod fillet"
+          alt={recipe.description}
           height={384}
           width={320}
           placeholder="blur"

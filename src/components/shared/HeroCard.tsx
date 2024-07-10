@@ -4,21 +4,21 @@ import Link from 'next/link';
 export type HeroCardProps = {
   image: StaticImageData;
   imagePosition: 'left' | 'right';
+  imageAlt: string;
   title: string;
   description: string;
   link?: string;
   linkText?: string;
-  priority: boolean;
 };
 
 export default function HeroCard({
   image,
   imagePosition,
+  imageAlt,
   title,
   description,
   link,
   linkText,
-  priority,
 }: HeroCardProps) {
   return (
     <div className="hero bg-base-200 p-8 rounded-md">
@@ -26,19 +26,21 @@ export default function HeroCard({
         <Image
           src={image}
           className="rounded-md w-[250px] h-[250px] lg:hidden"
-          alt="Recipe description"
+          alt={imageAlt}
           width={250}
           height={250}
-          priority={true}
+          // This is not working since it will download the image regardless of hidden attribute
+          // priority={true}
         />
 
         <Image
           src={image}
           className="rounded-md w-[400px] h-[400px] hidden lg:block"
-          alt="Recipe description"
+          alt={imageAlt}
           width={400}
           height={400}
-          priority={priority}
+          // This is not working since it will download the image regardless of hidden attribute
+          // priority={true}
         />
 
         <div className="h-full">

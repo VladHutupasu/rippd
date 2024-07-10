@@ -20,7 +20,6 @@ export default function BlogPost({
             alt="Blog post image"
             width={250}
             height={250}
-            priority={true}
           />
 
           <Image
@@ -29,7 +28,6 @@ export default function BlogPost({
             alt="Blog post image"
             width={400}
             height={400}
-            priority={true}
           />
         </div>
         {children}

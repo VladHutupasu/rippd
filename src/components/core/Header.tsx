@@ -37,8 +37,8 @@ export default function Header() {
   return (
     <div className="drawer">
       <input ref={drawerRef} id="my-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content w-full flex fixed top-0 z-50">
-        <div className="navbar px-2 md:px-32 bg-[url('/background.webp')]">
+      <div className="drawer-content">
+        <div className="navbar px-2 md:px-32 bg-[url('/background.webp')] flex fixed top-0 z-50">
           <div className="navbar-start">
             <label htmlFor="my-drawer" aria-label="open sidebar" className="btn btn-circle btn-ghost">
               <Bars3Icon strokeWidth={2} className="h-5 w-5" />
