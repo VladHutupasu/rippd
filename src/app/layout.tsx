@@ -75,8 +75,9 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <CSPostHogProvider>
         <body className={inter.className + ' bg-[url("/background.webp")] m-0 p-0 min-h-full flex flex-col box-border'}>
-          <Header />
           <main className="w-11/12 sm:w-4/5 lg:w-9/12 2xl:w-7/12 mx-auto pt-24 sm:pt-28 flex-1">{children}</main>
+          {/* Moving Header below <main> fixes the layout shoft when refreshin page with slow internet - e.g. blog page */}
+          <Header />
           <Footer />
         </body>
       </CSPostHogProvider>
