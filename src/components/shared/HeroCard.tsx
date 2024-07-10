@@ -8,9 +8,18 @@ export type HeroCardProps = {
   description: string;
   link?: string;
   linkText?: string;
+  priority: boolean;
 };
 
-export default function HeroCard({ image, imagePosition, title, description, link, linkText }: HeroCardProps) {
+export default function HeroCard({
+  image,
+  imagePosition,
+  title,
+  description,
+  link,
+  linkText,
+  priority,
+}: HeroCardProps) {
   return (
     <div className="hero bg-base-200 p-8 rounded-md">
       <div className={`hero-content p-0 gap-0 flex-col lg:flex-row${imagePosition === 'right' ? '-reverse' : ''}`}>
@@ -20,6 +29,7 @@ export default function HeroCard({ image, imagePosition, title, description, lin
           alt="Recipe description"
           width={250}
           height={250}
+          priority={true}
         />
 
         <Image
@@ -28,6 +38,7 @@ export default function HeroCard({ image, imagePosition, title, description, lin
           alt="Recipe description"
           width={400}
           height={400}
+          priority={priority}
         />
 
         <div className="h-full">

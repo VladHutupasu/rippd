@@ -1,7 +1,21 @@
 import ProteinCalculator from '@features/ProteinCalculator';
 import BlogImage from '@public/images/blog/protein-calculator.png';
 import BlogPost from '@shared/BlogPost';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Protein Calculator',
+  description:
+    'Use our free protein intake calculator to determine your daily protein needs. Achieve your fitness goals with a personalized high-protein diet plan tailored to your lifestyle and health goals.',
+  keywords: [
+    'protein calculator',
+    'calculate protein needs',
+    'high-protein diet',
+    'fitness nutrition',
+    'Rippd protein calculator',
+  ],
+};
 
 export default function ProteinCalculatorTool() {
   return (

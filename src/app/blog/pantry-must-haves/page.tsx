@@ -1,6 +1,21 @@
 import BlogImage from '@public/images/blog/pantry-must-haves.png';
 import BlogPost from '@shared/BlogPost';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Pantry Must-Haves: High Protein Foods',
+  description:
+    'Discover essential pantry-ready high protein foods for a healthy diet. Learn about protein-rich staples like tuna, Skyr, Greek yogurt, lentils, beans, and cottage cheese. Stock up on these items for easy meal preparation and enhanced muscle growth and repair.',
+  keywords: [
+    'high protein pantry foods',
+    'pantry staples for protein',
+    'protein-rich foods',
+    'muscle growth diet',
+    'high-protein meal prep',
+    'Rippd pantry must-haves',
+  ],
+};
 
 export default function PantryMustHaves() {
   return (

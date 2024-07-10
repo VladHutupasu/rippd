@@ -1,5 +1,22 @@
 import BlogImage from '@public/images/blog/why-control-glucose-spikes.png';
 import BlogPost from '@shared/BlogPost';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Why control your Glucose Spikes?',
+  description:
+    'Maintaining stable blood glucose levels is crucial for overall health. Discover how a diet high in protein helps manage glucose spikes, prevents energy crashes, reduces diabetes risk, supports weight management, enhances mental clarity, and promotes heart health.',
+  keywords: [
+    'blood glucose management',
+    'importance of stable glucose levels',
+    'high-protein diet benefits',
+    'diabetes prevention',
+    'weight management',
+    'mental clarity',
+    'heart health',
+    'Rippd health blog',
+  ],
+};
 
 export default function WhyControlGlucoseSpikes() {
   return (

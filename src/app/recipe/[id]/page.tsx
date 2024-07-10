@@ -13,6 +13,38 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  try {
+    const response = await db.recipe.findUnique({
+      where: {
+        id: params.id,
+      },
+      select: {
+        name: true,
+        description: true,
+      },
+    });
+
+    if (!response) {
+      return {
+        title: 'Recipe not found',
+        description: 'The recipe you are looking for does not exist.',
+      };
+    }
+
+    return {
+      title: response.name,
+      description: response.description,
+    };
+  } catch (error: unknown) {
+    console.error('Recipe not found', error);
+    return {
+      title: 'Recipe not found',
+      description: 'The recipe you are looking for does not exist.',
+    };
+  }
+}
+
 export default async function RecipeDetails({ params }: { params: { id: string } }) {
   const recipeId = params.id;
   let recipe;

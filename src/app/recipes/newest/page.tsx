@@ -1,6 +1,21 @@
 import db from '@lib/prisma';
 import RecipeImageCard from '@shared/RecipeImageCard';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Newest recipes',
+  description:
+    'Discover the latest healthy and high protein recipes on Rippd. Stay updated with new additions to fuel your fitness journey with delicious and nutritious meals.',
+  keywords: [
+    'new recipes',
+    'latest healthy recipes',
+    'new high-protein recipes',
+    'fitness diet',
+    'nutrition',
+    'Rippd newest recipes',
+  ],
+};
 
 export default async function NewestRecipes() {
   // TODO: Fetch the newest recipes from the database

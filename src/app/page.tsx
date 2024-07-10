@@ -24,6 +24,7 @@ export default async function Home() {
       'Discover delicious, high-protein meals that support your healthy lifestyle. Perfect for fueling your day and achieving your fitness goals.',
     link: `recipe/${recipes[0].id}`,
     linkText: 'Check out our latest recipe',
+    priority: true,
   };
 
   const latestArticleHero: HeroCardProps = {
@@ -34,6 +35,7 @@ export default async function Home() {
       'Learn how a high-protein diet can help you lose weight, build muscle, and improve your overall health. Discover the benefits and how to get started.',
     link: '/blog/why-is-protein-important',
     linkText: 'Read more',
+    priority: false,
   };
 
   return (

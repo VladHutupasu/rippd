@@ -11,8 +11,58 @@ const inter = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Rippd',
-  description: 'Healthy recipes',
+  metadataBase: new URL('https://rippd.io'),
+  keywords: [
+    'healthy recipes',
+    'fitness meals',
+    'high-protein recipes',
+    'low-carb meals',
+    'nutrition',
+    'fitness diet',
+    'Rippd',
+    'food blog',
+    'health tips',
+  ],
+  title: {
+    default: 'Rippd - Healthy & High Protein Recipes',
+    template: '%s | Rippd Healthy & High Protein Recipes',
+  },
+  description:
+    'Discover a wide range of healthy recipes tailored for fitness enthusiasts. From high-protein meals to low-carb options, Rippd has everything you need to fuel your fitness journey.',
+  openGraph: {
+    title: 'Rippd - Healthy & High Protein Recipes',
+    description:
+      'Discover healthy and high protein recipes on Rippd. Stay fit with delicious and nutritious meals. Explore our blog for additional tips on food and nutrition.',
+    url: 'https://rippd.io',
+    type: 'website',
+    images: [
+      {
+        url: 'https://rippd.io/images/isometric/hero.png',
+        width: 1024,
+        height: 1024,
+        alt: 'Rippd - Healthy & High Protein Recipes',
+      },
+    ],
+    siteName: 'Rippd',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Rippd - Healthy & High Protein Recipes',
+
+    description:
+      'Discover healthy and high protein recipes on Rippd. Stay fit with delicious and nutritious meals. Explore our blog for additional tips on food and nutrition.',
+    images: [
+      {
+        url: 'https://rippd.io/images/isometric/hero.png',
+        width: 1024,
+        height: 1024,
+        alt: 'Rippd - Healthy & High Protein Recipes',
+      },
+    ],
+  },
+  alternates: {
+    canonical: 'https://rippd.io',
+  },
 };
 
 // TODO: SEO - https://dminhvu.com/post/nextjs-seo

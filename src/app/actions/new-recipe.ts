@@ -4,6 +4,10 @@ import db from '@lib/prisma';
 import { Complexity, Tag } from '@prisma/client';
 
 export async function createNewRecipe(formData: FormData) {
+  //TODO: Move this to admin
+  if (process.env.NODE_ENV == 'production') {
+    throw new Error('Not allowed');
+  }
   const ingredients = formData.getAll('ingredients').map(ingredient => JSON.parse(ingredient as string));
 
   await db.recipe.create({

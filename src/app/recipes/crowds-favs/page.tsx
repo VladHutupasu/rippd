@@ -1,6 +1,21 @@
 import db from '@lib/prisma';
 import RecipeImageCard from '@shared/RecipeImageCard';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: "Crowd's favourite recipes",
+  description:
+    'Explore the most popular healthy and high protein recipes on Rippd. Discover crowd favourites that are delicious and nutritious, perfect for fueling your fitness journey.',
+  keywords: [
+    'popular recipes',
+    'favourite healthy recipes',
+    'top high-protein recipes',
+    'fitness diet',
+    'nutrition',
+    'Rippd popular recipes',
+  ],
+};
 
 export default async function CrowdsFavsrecipes() {
   // TODO: Fetch the crowds favs recipes from the database
