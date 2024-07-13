@@ -112,7 +112,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
     }).map(ingredient => ingredient.quantityAndUnit + ' ' + ingredient.name),
     recipeInstructions: recipe.Instructions?.steps,
     recipeCategory: recipe.tags,
-    cookTime: recipe.cookTime,
+    cookTime: `PT${recipe.cookTime}M`,
     nutrition: {
       '@type': 'NutritionInformation',
       calories: macrosPerServing.calories,
