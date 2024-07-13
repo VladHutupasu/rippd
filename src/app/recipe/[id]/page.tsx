@@ -86,15 +86,46 @@ export default async function RecipeDetails({ params }: { params: { id: string }
         acc.carbs += curr.Ingredient.Macros.carbs * curr.quantity;
         acc.protein += curr.Ingredient.Macros.protein * curr.quantity;
         acc.fats += curr.Ingredient.Macros.fats * curr.quantity;
-        // console.log(curr.Ingredient.name + ' ' + curr.Ingredient.Macros.calories * curr.quantity);
       }
       return acc;
     },
     { calories: 0, carbs: 0, protein: 0, fats: 0 }
   );
 
+  const macrosPerServing = {
+    calories: Math.ceil(macros.calories / recipe.servings),
+    carbs: Math.ceil(macros.carbs / recipe.servings),
+    protein: Math.ceil(macros.protein / recipe.servings),
+    fats: Math.ceil(macros.fats / recipe.servings),
+  };
+
+  // Generate JSON-LD schema
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Recipe',
+    name: recipe.name,
+    description: recipe.description,
+    image: recipe.imageSrc,
+    recipeYield: recipe.servings,
+    recipeIngredient: recipe.RecipeIngredient.map(recipe => {
+      return { ...recipe.Ingredient, quantityAndUnit: formatQuantity(recipe.quantity, recipe.Ingredient.unit) };
+    }).map(ingredient => ingredient.quantityAndUnit + ' ' + ingredient.name),
+    recipeInstructions: recipe.Instructions?.steps,
+    recipeCategory: recipe.tags,
+    cookTime: recipe.cookTime,
+    nutrition: {
+      '@type': 'NutritionInformation',
+      calories: macrosPerServing.calories,
+      carbohydrateContent: macrosPerServing.carbs,
+      proteinContent: macrosPerServing.protein,
+      fatContent: macrosPerServing.fats,
+    },
+  };
+
   return (
     <section>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
       {/* TODO: General component for this */}
       <div className="text-xs font-light opacity-60 breadcrumbs sm:mb-4">
         <ul>
@@ -136,9 +167,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Calories <BeakerIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">
-                  {Math.ceil(macros.calories / recipe.servings)}
-                </div>
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.calories}</div>
               </div>
 
               <div className="stat px-3 sm:px-8 flex-1 min-w-24">
@@ -162,27 +191,21 @@ export default async function RecipeDetails({ params }: { params: { id: string }
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Carbs <BoltIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">
-                  {Math.ceil(macros.carbs / recipe.servings)}
-                </div>
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.carbs}</div>
               </div>
 
               <div className="stat px-3 sm:px-8 flex-1 min-w-24">
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Protein <FireIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">
-                  {Math.ceil(macros.protein / recipe.servings)}
-                </div>
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.protein}</div>
               </div>
 
               <div className="stat px-3 sm:px-8 flex-1 min-w-24">
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Fats <RocketLaunchIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">
-                  {Math.ceil(macros.fats / recipe.servings)}
-                </div>
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.fats}</div>
               </div>
             </div>
           </div>
