@@ -120,6 +120,8 @@ export default async function RecipeDetails({ params }: { params: { id: string }
       proteinContent: macrosPerServing.protein,
       fatContent: macrosPerServing.fats,
     },
+    // TODO: Imrpove this keywords section, now using tags
+    keywords: recipe.tags.join(', '),
   };
 
   return (
