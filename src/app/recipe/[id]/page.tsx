@@ -105,12 +105,14 @@ export default async function RecipeDetails({ params }: { params: { id: string }
     '@type': 'Recipe',
     name: recipe.name,
     description: recipe.description,
-    image: `https://rippd.io/${recipe.imageSrc}`,
-    recipeYield: recipe.servings,
+    image: `https://rippd.io${recipe.imageSrc.src}`,
+    recipeYield: `${recipe.servings} servings`,
     recipeIngredient: recipe.RecipeIngredient.map(recipe => {
       return { ...recipe.Ingredient, quantityAndUnit: formatQuantity(recipe.quantity, recipe.Ingredient.unit) };
     }).map(ingredient => ingredient.quantityAndUnit + ' ' + ingredient.name),
-    recipeInstructions: recipe.Instructions?.steps,
+    recipeInstructions: recipe.Instructions?.steps.map(step => {
+      return { '@type': 'HowToStep', text: step };
+    }),
     recipeCategory: recipe.tags,
     cookTime: `PT${recipe.cookTime}M`,
     nutrition: {
@@ -120,8 +122,10 @@ export default async function RecipeDetails({ params }: { params: { id: string }
       proteinContent: macrosPerServing.protein,
       fatContent: macrosPerServing.fats,
     },
+    //TODO: Add recipeCuisine
+    //TODO: Add prepTime, cookTime, totalTime
     // TODO: Imrpove this keywords section, now using tags
-    keywords: recipe.tags.join(', '),
+    keywords: recipe.name,
   };
 
   return (
