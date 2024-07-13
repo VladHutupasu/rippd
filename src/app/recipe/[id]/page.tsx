@@ -105,7 +105,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
     '@type': 'Recipe',
     name: recipe.name,
     description: recipe.description,
-    image: recipe.imageSrc,
+    image: `https://rippd.io/${recipe.imageSrc}`,
     recipeYield: recipe.servings,
     recipeIngredient: recipe.RecipeIngredient.map(recipe => {
       return { ...recipe.Ingredient, quantityAndUnit: formatQuantity(recipe.quantity, recipe.Ingredient.unit) };
