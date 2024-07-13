@@ -9,7 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 import db from '@lib/prisma';
 import { formatQuantity } from '@shared/models/QuantityUnitTransformations';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
@@ -76,7 +76,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
     redirect('/not-found');
   }
 
-  recipe.imageSrc = require(`@public/images/recipes/${recipe.imageSrc}`).default;
+  const recipeImage: StaticImageData = require(`@public/images/recipes/${recipe.imageSrc}`).default;
 
   // Calculate total macros
   const macros = recipe.RecipeIngredient.reduce(
@@ -103,9 +103,13 @@ export default async function RecipeDetails({ params }: { params: { id: string }
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Recipe',
+    author: {
+      '@type': 'Organization',
+      name: 'Rippd',
+    },
     name: recipe.name,
     description: recipe.description,
-    image: `https://rippd.io${recipe.imageSrc.src}`,
+    image: `https://rippd.io${recipeImage.src}`,
     recipeYield: `${recipe.servings} servings`,
     recipeIngredient: recipe.RecipeIngredient.map(recipe => {
       return { ...recipe.Ingredient, quantityAndUnit: formatQuantity(recipe.quantity, recipe.Ingredient.unit) };
@@ -146,7 +150,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
       </div>
       <div className="flex flex-col lg:flex-row gap-8">
         <Image
-          src={recipe.imageSrc}
+          src={recipeImage}
           className="h-72 w-full object-cover absolute inset-0 mt-[8.7rem] sm:hidden"
           alt={recipe.description}
           height={288}
@@ -155,7 +159,7 @@ export default async function RecipeDetails({ params }: { params: { id: string }
         />
 
         <Image
-          src={recipe.imageSrc}
+          src={recipeImage}
           className="h-96 w-full lg:w-80 min-w-80 object-cover rounded-md hidden sm:block"
           alt={recipe.description}
           height={384}
