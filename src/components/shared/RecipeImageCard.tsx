@@ -9,7 +9,7 @@ import Link from 'next/link';
 export default function RecipeImageCard({ recipe, size }: { recipe: Recipe; size: 'small' | 'normal' }) {
   return (
     <Link
-      href={`/recipe/${recipe.id}`}
+      href={`/recipe/${recipe.slug}`}
       className={`flex flex-col items-start gap-1 ${
         size === 'small' ? 'max-w-[170px]' : 'max-w-[208px]'
       } sm:max-w-[256px]`}

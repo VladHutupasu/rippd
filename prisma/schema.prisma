@@ -33,6 +33,7 @@ model Recipe {
   id               String            @id @default(uuid())
   createdAt        DateTime          @default(now()) @map(name: "created_at")
   updatedAt        DateTime          @updatedAt @map(name: "updated_at")
+  slug             String            @unique
   name             String
   description      String
   imageSrc         String

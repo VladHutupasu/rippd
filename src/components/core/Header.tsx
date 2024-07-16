@@ -119,7 +119,7 @@ export default function Header() {
           {searchResults.length > 0 && (
             <div className="flex flex-wrap gap-4 justify-between">
               {searchResults.map(recipe => (
-                <Link key={recipe.id} href={`/recipe/${recipe.id}`} onClick={() => closeDrawer()}>
+                <Link key={recipe.id} href={`/recipe/${recipe.slug}`} onClick={() => closeDrawer()}>
                   <div key={recipe.id} className="flex flex-col gap-1 max-w-40">
                     <Image
                       src={recipe.imageSrc}

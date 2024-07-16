@@ -4,12 +4,12 @@ import db from '@lib/prisma';
 export default async function sitemap() {
   const response = await db.recipe.findMany({
     select: {
-      id: true,
+      slug: true,
     },
   });
 
   const recipes = response.map(recipe => ({
-    url: `https://rippd.io/recipe/${recipe.id}`,
+    url: `https://rippd.io/recipe/${recipe.slug}`,
     lastModified: new Date(),
     priority: 0.8,
   }));

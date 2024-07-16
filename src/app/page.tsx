@@ -23,7 +23,7 @@ export default async function Home() {
     title: 'Protein packed healthy recipes',
     description:
       'Discover delicious, high-protein meals that support your healthy lifestyle. Perfect for fueling your day and achieving your fitness goals.',
-    link: `recipe/${recipes[0].id}`,
+    link: `recipe/${recipes[0].slug}`,
     linkText: 'Check out our latest recipe',
   };
 

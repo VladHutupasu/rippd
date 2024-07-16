@@ -13,11 +13,11 @@ import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({ params }: { params: { slug: string } }) {
   try {
     const response = await db.recipe.findUnique({
       where: {
-        id: params.id,
+        slug: params.slug,
       },
       select: {
         name: true,
@@ -45,14 +45,13 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   }
 }
 
-export default async function RecipeDetails({ params }: { params: { id: string } }) {
-  const recipeId = params.id;
+export default async function RecipeDetails({ params }: { params: { slug: string } }) {
   let recipe;
 
   try {
     recipe = await db.recipe.findUnique({
       where: {
-        id: recipeId,
+        slug: params.slug,
       },
       include: {
         Instructions: true,

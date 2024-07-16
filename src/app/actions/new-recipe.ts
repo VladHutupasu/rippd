@@ -13,6 +13,7 @@ export async function createNewRecipe(formData: FormData) {
   await db.recipe.create({
     data: {
       name: formData.get('name') as string,
+      slug: formData.get('slug') as string,
       description: formData.get('description') as string,
       imageSrc: formData.get('imageSrc') as string,
       tags: formData.getAll('tags') as Tag[],
