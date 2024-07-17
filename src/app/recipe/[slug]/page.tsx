@@ -98,6 +98,9 @@ export default async function RecipeDetails({ params }: { params: { slug: string
     fats: Math.ceil(macros.fats / recipe.servings),
   };
 
+  const wValues = [128, 256, 384, 640, 1200];
+  const imageURLs = wValues.map(w => `https://rippd.io/_next/image?url=${recipeImage.src}&w=${w}&q=75`);
+
   // Generate JSON-LD schema
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -108,7 +111,7 @@ export default async function RecipeDetails({ params }: { params: { slug: string
     },
     name: recipe.name,
     description: recipe.description,
-    image: `https://rippd.io${recipeImage.src}`,
+    image: imageURLs,
     recipeYield: `${recipe.servings} servings`,
     recipeIngredient: recipe.RecipeIngredient.map(recipe => {
       return { ...recipe.Ingredient, quantityAndUnit: formatQuantity(recipe.quantity, recipe.Ingredient.unit) };
