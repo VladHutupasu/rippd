@@ -270,3 +270,19 @@ export default async function RecipeDetails({ params }: { params: { slug: string
     </section>
   );
 }
+
+/**
+ * Function to generate static pages on build
+ * @returns a list of `params` to populate the [slug] dynamic segment
+/**
+ */
+export async function generateStaticParams() {
+  const recipeSlugs = await db.recipe.findMany({
+    select: {
+      slug: true,
+    },
+  });
+  return recipeSlugs.map(recipeSlug => ({
+    slug: recipeSlug.slug,
+  }));
+}
