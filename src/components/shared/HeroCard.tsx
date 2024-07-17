@@ -30,7 +30,7 @@ export default function HeroCard({
           width={250}
           height={250}
           // This is not working since it will download the image regardless of hidden attribute
-          priority={true}
+          // priority={true}
         />
 
         <Image
@@ -40,7 +40,7 @@ export default function HeroCard({
           width={400}
           height={400}
           // This is not working since it will download the image regardless of hidden attribute
-          priority={true}
+          // priority={true}
         />
 
         <div className="h-full">
