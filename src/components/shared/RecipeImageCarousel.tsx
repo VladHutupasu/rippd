@@ -7,7 +7,7 @@ export default function RecipeImageCarousel({ recipes, title }: { recipes: Recip
   return (
     <section>
       <div className="flex justify-between items-center">
-        <h1 className="font-bold text-xl lg:text-2xl">{title}</h1>
+        <h2 className="font-bold text-xl lg:text-2xl">{title}</h2>
         <Image className="h-5 w-5 opacity-40" src={SwipeLeftIcon} alt="swipe-left" width={20} height={20} />
       </div>
       <div className="carousel carousel-center max-w-full pt-2 space-x-4 bg-transparent">

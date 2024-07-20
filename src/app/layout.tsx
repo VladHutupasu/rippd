@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: '%s | Rippd Healthy & High Protein Recipes',
   },
   description:
-    'Discover a wide range of healthy recipes tailored for fitness enthusiasts. From high-protein meals to low-carb options, Rippd has everything you need to fuel your fitness journey.',
+    'Explore a wide range of healthy recipes, from high-protein to low-carb options. Rippd has everything you need for a balanced lifestyle.',
   openGraph: {
     title: 'Rippd - Healthy & High Protein Recipes',
     description:

@@ -6,7 +6,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Pantry Must-Haves: High Protein Foods',
   description:
-    'Discover essential pantry-ready high protein foods for a healthy diet. Learn about protein-rich staples like tuna, Skyr, Greek yogurt, lentils, beans, and cottage cheese. Stock up on these items for easy meal preparation and enhanced muscle growth and repair.',
+    'Discover essential high-protein foods like tuna, Skyr, Greek yogurt, lentils, beans, and cottage cheese. Stock up for easy meal prep and improved muscle growth.',
   keywords: [
     'high protein pantry foods',
     'pantry staples for protein',

@@ -4,17 +4,10 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'All recipes',
+  title: 'Our recipes',
   description:
     'Discover all of our healthy and high protein recipes on Rippd. Stay updated with new additions to fuel your fitness journey with delicious and nutritious meals.',
-  keywords: [
-    'all recipes',
-    'healthy recipes',
-    'high-protein recipes',
-    'fitness diet',
-    'nutrition',
-    'Rippd all recipes',
-  ],
+  keywords: ['healthy recipes', 'high-protein recipes', 'fitness diet', 'nutrition', 'Rippd all recipes'],
   alternates: {
     canonical: 'https://rippd.io/recipes/all',
   },

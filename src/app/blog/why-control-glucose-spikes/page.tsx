@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Why control your Glucose Spikes?',
   description:
-    'Maintaining stable blood glucose levels is crucial for overall health. Discover how a diet high in protein helps manage glucose spikes, prevents energy crashes, reduces diabetes risk, supports weight management, enhances mental clarity, and promotes heart health.',
+    'Learn how a high-protein diet stabilizes blood glucose, prevents energy dips, reduces diabetes risk, supports weight loss, and boosts heart health.',
   keywords: [
     'blood glucose management',
     'importance of stable glucose levels',

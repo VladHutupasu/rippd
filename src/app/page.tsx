@@ -28,6 +28,7 @@ export default async function Home() {
     imagePosition: 'right',
     imageAlt: 'Protein packed healthy foods',
     title: 'Protein packed healthy recipes',
+    titleHeadingNumber: 'h1',
     description:
       'Discover delicious, high-protein meals that support your healthy lifestyle. Perfect for fueling your day and achieving your fitness goals.',
     link: `recipe/${recipes[0].slug}`,
@@ -39,6 +40,7 @@ export default async function Home() {
     imagePosition: 'left',
     imageAlt: 'Healthy heart and body',
     title: 'The benefits of a high-protein diet',
+    titleHeadingNumber: 'h2',
     description:
       'Learn how a high-protein diet can help you lose weight, build muscle, and improve your overall health. Discover the benefits and how to get started.',
     link: '/blog/why-is-protein-important',

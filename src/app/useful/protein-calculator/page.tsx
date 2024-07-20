@@ -10,7 +10,7 @@ const ProteinCalculator = dynamic(() => import('@features/ProteinCalculator'), {
 export const metadata: Metadata = {
   title: 'Protein Calculator',
   description:
-    'Use our free protein intake calculator to determine your daily protein needs. Achieve your fitness goals with a personalized high-protein diet plan tailored to your lifestyle and health goals.',
+    'Use our free protein intake calculator to find your daily protein needs. Achieve your fitness goals with a personalized high-protein diet plan tailored to you.',
   keywords: [
     'protein calculator',
     'calculate protein needs',

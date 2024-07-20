@@ -6,7 +6,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'The Power of Protein: Why is protein important?',
   description:
-    "Learn about the crucial role protein plays in your diet with Rippd's blog post, 'The Power of Protein: Why is Protein Important?' Discover how protein supports fitness, muscle growth, and overall health.",
+    'Learn how protein supports fitness, muscle growth, and overall health in our latest post on the essential role of protein in your diet.',
   keywords: [
     'importance of protein',
     'protein benefits',

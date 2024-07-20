@@ -6,7 +6,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: "Crowd's favourite recipes",
   description:
-    'Explore the most popular healthy and high protein recipes on Rippd. Discover crowd favourites that are delicious and nutritious, perfect for fueling your fitness journey.',
+    'Explore popular healthy, high-protein recipes on Rippd. Discover crowd favorites that are delicious, nutritious, and perfect for fueling your fitness journey.',
   keywords: [
     'popular recipes',
     'favourite healthy recipes',

@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       select: {
         name: true,
         description: true,
+        imageSrc: true,
       },
     });
 
@@ -38,6 +39,36 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     return {
       title: response.name,
       description: response.description,
+      openGraph: {
+        title: `${response.name} | Rippd Healthy & High Protein Recipes`,
+        description: response.description,
+        url: `https://rippd.io/recipe/${params.slug}`,
+        type: 'website',
+        images: [
+          {
+            url: `https://rippd.io/images/recipes/${response.imageSrc}`,
+            width: 1024,
+            height: 1024,
+            alt: response.name,
+          },
+        ],
+        siteName: 'Rippd',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Rippd - Healthy & High Protein Recipes',
+
+        description:
+          'Discover healthy and high protein recipes on Rippd. Stay fit with delicious and nutritious meals. Explore our blog for additional tips on food and nutrition.',
+        images: [
+          {
+            url: `https://rippd.io/images/recipes/${response.imageSrc}`,
+            width: 1024,
+            height: 1024,
+            alt: response.name,
+          },
+        ],
+      },
       alternates: {
         canonical: `https://rippd.io/recipe/${params.slug}`,
       },
