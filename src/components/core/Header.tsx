@@ -6,6 +6,7 @@ import { Recipe } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { SidebarSection } from './models/SidebarLink';
 
 export default function Header() {
   const isFirstRender = useRef(true);
@@ -15,6 +16,52 @@ export default function Header() {
   const [shouldFocus, setShouldFocus] = useState<null | boolean>(null);
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState<Recipe[]>([]);
+
+  const sidebarItems: SidebarSection[] = [
+    {
+      category: 'Recipes',
+      links: [
+        {
+          name: 'All recipes',
+          href: '/recipes/all',
+        },
+        {
+          name: 'Newest recipes',
+          href: '/recipes/newest',
+        },
+        {
+          name: "Crowd's favs",
+          href: '/recipes/crowds-favs',
+        },
+      ],
+    },
+    {
+      category: 'Blog',
+      links: [
+        {
+          name: 'Why is Protein important?',
+          href: '/blog/why-is-protein-important',
+        },
+        {
+          name: 'Pantry Must-Haves: High Protein Foods',
+          href: '/blog/pantry-must-haves',
+        },
+        {
+          name: 'Why control Glucose Spikes?',
+          href: '/blog/why-control-glucose-spikes',
+        },
+      ],
+    },
+    {
+      category: 'Useful',
+      links: [
+        {
+          name: 'Protein Calculator',
+          href: '/useful/protein-calculator',
+        },
+      ],
+    },
+  ];
 
   useEffect(() => {
     // Prevent modal to show up on component mount
@@ -137,63 +184,20 @@ export default function Header() {
           )}
           {searchResults.length === 0 && (
             <>
-              <section>
-                <p className="text-lg font-semibold">Recipes</p>
-                <ul>
-                  {/* <li>
-                    <a>
-                      Saved recipes <HeartIcon strokeWidth={2} className="h-5 w-5 text-error" />
-                    </a>
-                  </li> */}
-                  <li>
-                    <Link href="/recipes/all" onClick={() => closeDrawer()}>
-                      All recipes
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/recipes/newest" onClick={() => closeDrawer()}>
-                      Newest recipes
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/recipes/crowds-favs" onClick={() => closeDrawer()}>
-                      Crowd&apos;s favs
-                    </Link>
-                  </li>
-                </ul>
-              </section>
-
-              <section>
-                <p className="text-lg font-semibold">Blog</p>
-                <ul>
-                  <li>
-                    <Link href={`/blog/why-is-protein-important`} onClick={() => closeDrawer()}>
-                      Why is Protein important?
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={`/blog/why-control-glucose-spikes`} onClick={() => closeDrawer()}>
-                      Why control Glucose Spikes?
-                    </Link>
-                  </li>
-                </ul>
-              </section>
-
-              <section>
-                <p className="text-lg font-semibold">Useful</p>
-                <ul>
-                  <li>
-                    <Link href={`/blog/protein-calculator`} onClick={() => closeDrawer()}>
-                      Protein Calculator
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={`/blog/pantry-must-haves`} onClick={() => closeDrawer()}>
-                      Pantry Must-Haves: High Protein Foods
-                    </Link>
-                  </li>
-                </ul>
-              </section>
+              {sidebarItems.map(item => (
+                <section key={item.category}>
+                  <p className="text-lg font-semibold">{item.category}</p>
+                  <ul>
+                    {item.links.map(link => (
+                      <li key={link.name}>
+                        <Link href={link.href} onClick={() => closeDrawer()}>
+                          {link.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
             </>
           )}
         </div>

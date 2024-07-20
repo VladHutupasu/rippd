@@ -19,14 +19,13 @@ export const metadata: Metadata = {
     'Rippd protein calculator',
   ],
   alternates: {
-    canonical: 'https://rippd.io/blog/protein-calculator',
+    canonical: 'https://rippd.io/useful/protein-calculator',
   },
 };
 
 export default function ProteinCalculatorTool() {
   return (
     <BlogPost title="Protein Calculator" image={BlogImage}>
-      {/* <h1 className="bg-base-200 m-0 rounded-md p-6">How much protein do you need?</h1> */}
       <div>
         <h2>Why Protein Matters</h2>
         <p>

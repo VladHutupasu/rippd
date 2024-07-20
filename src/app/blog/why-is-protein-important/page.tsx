@@ -72,7 +72,7 @@ export default function WhyIsProteinImportant() {
 
         <p>
           👉&nbsp;
-          <Link href={`/blog/protein-calculator`}>Check out our tool to calculate your daily protein needs</Link>
+          <Link href={`/useful/protein-calculator`}>Check out our tool to calculate your daily protein needs</Link>
         </p>
       </div>
     </BlogPost>
