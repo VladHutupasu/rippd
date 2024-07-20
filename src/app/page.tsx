@@ -3,9 +3,16 @@ import LatestArticleHeroImage from '@public/images/isometric/heart.png';
 import LatestRecipeHeroImage from '@public/images/isometric/hero.png';
 import HeroCard, { HeroCardProps } from '@shared/HeroCard';
 import RecipeImageCarousel from '@shared/RecipeImageCarousel';
+import { Metadata } from 'next';
 
 // Revalidate HOME PAGE every 5 minutes
 export const revalidate = 300;
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: 'https://rippd.io',
+  },
+};
 
 export default async function Home() {
   const recipes = await db.recipe.findMany({

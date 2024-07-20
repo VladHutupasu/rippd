@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     'heart health',
     'Rippd health blog',
   ],
+  alternates: {
+    canonical: 'https://rippd.io/blog/why-control-glucose-spikes',
+  },
 };
 
 export default function WhyControlGlucoseSpikes() {

@@ -146,6 +146,11 @@ export default function Header() {
                     </a>
                   </li> */}
                   <li>
+                    <Link href="/recipes/all" onClick={() => closeDrawer()}>
+                      All recipes
+                    </Link>
+                  </li>
+                  <li>
                     <Link href="/recipes/newest" onClick={() => closeDrawer()}>
                       Newest recipes
                     </Link>

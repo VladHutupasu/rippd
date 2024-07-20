@@ -1,8 +1,11 @@
-import ProteinCalculator from '@features/ProteinCalculator';
 import BlogImage from '@public/images/blog/protein-calculator.png';
 import BlogPost from '@shared/BlogPost';
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
+const ProteinCalculator = dynamic(() => import('@features/ProteinCalculator'), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   title: 'Protein Calculator',
@@ -15,6 +18,9 @@ export const metadata: Metadata = {
     'fitness nutrition',
     'Rippd protein calculator',
   ],
+  alternates: {
+    canonical: 'https://rippd.io/blog/protein-calculator',
+  },
 };
 
 export default function ProteinCalculatorTool() {

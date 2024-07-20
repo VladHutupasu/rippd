@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     'health tips',
     'Rippd protein blog',
   ],
+  alternates: {
+    canonical: 'https://rippd.io/blog/why-is-protein-important',
+  },
 };
 
 export default function WhyIsProteinImportant() {

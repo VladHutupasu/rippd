@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     'high-protein meal prep',
     'Rippd pantry must-haves',
   ],
+  alternates: {
+    canonical: 'https://rippd.io/blog/pantry-must-haves',
+  },
 };
 
 export default function PantryMustHaves() {

@@ -11,7 +11,13 @@ import db from '@lib/prisma';
 import { formatQuantity } from '@shared/models/QuantityUnitTransformations';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
+
+const recipeNotFoundMetadata = {
+  title: 'Recipe not found',
+  description: 'The recipe you are looking for does not exist.',
+  keywords: [],
+};
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   try {
@@ -26,22 +32,19 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     });
 
     if (!response) {
-      return {
-        title: 'Recipe not found',
-        description: 'The recipe you are looking for does not exist.',
-      };
+      return recipeNotFoundMetadata;
     }
 
     return {
       title: response.name,
       description: response.description,
+      alternates: {
+        canonical: `https://rippd.io/recipe/${params.slug}`,
+      },
     };
   } catch (error: unknown) {
     console.error('Recipe not found', error);
-    return {
-      title: 'Recipe not found',
-      description: 'The recipe you are looking for does not exist.',
-    };
+    return recipeNotFoundMetadata;
   }
 }
 
@@ -67,12 +70,11 @@ export default async function RecipeDetails({ params }: { params: { slug: string
       },
     });
   } catch (error: unknown) {
-    console.error('Unable to fetch recipe', error);
+    console.error('Unable to fetch recipe - ', error);
   }
 
-  //TODO: re-route to not found page
   if (!recipe) {
-    redirect('/not-found');
+    notFound();
   }
 
   const recipeImage: StaticImageData = require(`@public/images/recipes/${recipe.imageSrc}`).default;

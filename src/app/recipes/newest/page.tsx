@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     'nutrition',
     'Rippd newest recipes',
   ],
+  alternates: {
+    canonical: 'https://rippd.io/recipes/newest',
+  },
 };
 
 export default async function NewestRecipes() {
@@ -34,9 +37,6 @@ export default async function NewestRecipes() {
         <ul>
           <li>
             <Link href={'/'}>Home</Link>
-          </li>
-          <li>
-            <Link href={'/'}>Recipes</Link>
           </li>
           <li>Newest Recipes</li>
         </ul>

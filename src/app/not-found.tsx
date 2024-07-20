@@ -1,32 +1,12 @@
-import NotFoundImage from '@public/images/not-found.png';
-import Image from 'next/image';
-import Link from 'next/link';
+import NotFound from '@core/NotFound';
+import { Metadata } from 'next';
 
-export default function NotFound() {
-  return (
-    <div className="flex flex-col flex-grow items-center justify-center ">
-      <div>
-        <Image
-          src={NotFoundImage}
-          className="rounded-md w-[250px] h-[250px] m-0 lg:hidden"
-          alt="Page not found"
-          width={250}
-          height={250}
-        />
+export const metadata: Metadata = {
+  title: 'Page not found',
+  description: 'The page you are looking for does not exist. Please check the URL or go back to the homepage.',
+  keywords: [],
+};
 
-        <Image
-          src={NotFoundImage}
-          className="rounded-md w-[400px] h-[400px] hidden m-0 lg:block"
-          alt="Page not found"
-          width={400}
-          height={400}
-        />
-      </div>
-      <h2 className="font-semibold text-2xl mb-4">Page Not Found</h2>
-
-      <Link href="/">
-        <button className="btn btn-neutral">Return Home</button>
-      </Link>
-    </div>
-  );
+export default function PageNotFound() {
+  return <NotFound title="Page Not Found" linkText="Go to Homepage" linkUrl="/" />;
 }

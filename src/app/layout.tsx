@@ -60,9 +60,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  alternates: {
-    canonical: 'https://rippd.io',
-  },
 };
 
 // TODO: SEO - https://dminhvu.com/post/nextjs-seo
