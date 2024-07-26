@@ -219,7 +219,7 @@ export default async function RecipeDetails({ params }: { params: { slug: string
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Time <ClockIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{recipe.cookTime}</div>
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{recipe.cookTime}m</div>
               </div>
 
               <div className="stat px-3 sm:px-8 flex-1 min-w-24">
@@ -236,21 +236,21 @@ export default async function RecipeDetails({ params }: { params: { slug: string
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Carbs <BoltIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.carbs}</div>
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.carbs}g</div>
               </div>
 
               <div className="stat px-3 sm:px-8 flex-1 min-w-24">
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Protein <FireIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.protein}</div>
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.protein}g</div>
               </div>
 
               <div className="stat px-3 sm:px-8 flex-1 min-w-24">
                 <div className="stat-title text-xs sm:text-sm xl:text-base">
                   Fats <RocketLaunchIcon className="h-4 w-4 inline-block" />
                 </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.fats}</div>
+                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.fats}g</div>
               </div>
             </div>
           </div>
@@ -277,9 +277,9 @@ export default async function RecipeDetails({ params }: { params: { slug: string
         }).map(ingredient => (
           <label key={ingredient.id} className="label cursor-pointer justify-between px-0">
             <div className="flex gap-2 font-light text-sm">
-              <input type="checkbox" className="checkbox checkbox-sm checkbox-primary" />
-              <span className="opacity-60">{ingredient.quantityAndUnit}</span>
-              <span>{ingredient.name}</span>
+              <input type="checkbox" className="checkbox checkbox-sm checkbox-primary peer" />
+              <span className="opacity-60 peer-checked:line-through">{ingredient.quantityAndUnit}</span>
+              <span className="peer-checked:line-through">{ingredient.name}</span>
             </div>
           </label>
         ))}

@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 const ProteinCalculator = dynamic(() => import('@features/ProteinCalculator'), {
   ssr: false,
+  loading: () => <div className="skeleton h-[650px] w-full"></div>,
 });
 
 export const metadata: Metadata = {

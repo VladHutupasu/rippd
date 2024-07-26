@@ -9,6 +9,10 @@ type ProteinIntake = {
 };
 
 export default function ProteinCalculator() {
+  const [age, setAge] = useState('');
+  const [weight, setWeight] = useState('');
+  const [activityLevel, setActivityLevel] = useState('');
+  const [gender, setGender] = useState('');
   const [proteinIntake, setProteinIntake] = useState<ProteinIntake | null>(null);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -94,11 +98,32 @@ export default function ProteinCalculator() {
       {!proteinIntake && (
         <form className="flex flex-col gap-3 max-w-md mx-auto" onSubmit={onSubmit}>
           <label className="input input-primary input-bordered flex items-center">
-            <input type="number" name="age" min="1" max="100" className="flex-1" placeholder="Age" required />
+            <input
+              type="number"
+              name="age"
+              value={age}
+              onChange={e => setAge(e.target.value)}
+              min="1"
+              max="100"
+              className="flex-1"
+              placeholder="Age"
+              required
+            />
           </label>
 
           <label className="input input-primary input-bordered flex items-center gap-2">
-            <input type="number" name="weight" min="10" max="200" className="flex-1" placeholder="Weight" required />
+            <input
+              type="number"
+              name="weight"
+              value={weight}
+              onChange={e => setWeight(e.target.value)}
+              min="10"
+              max="200"
+              step={0.1}
+              className="flex-1"
+              placeholder="Weight"
+              required
+            />
             <span className="font-semibold">kg</span>
           </label>
 
@@ -108,6 +133,8 @@ export default function ProteinCalculator() {
               type="radio"
               name="activity"
               value="sedentary"
+              checked={activityLevel === 'sedentary'}
+              onChange={e => setActivityLevel(e.target.value)}
               aria-label="Sedentary (little or no exercise)"
               required
             />
@@ -116,6 +143,8 @@ export default function ProteinCalculator() {
               type="radio"
               name="activity"
               value="moderate"
+              checked={activityLevel === 'moderate'}
+              onChange={e => setActivityLevel(e.target.value)}
               aria-label="Moderate (exercise 1-3 days a week)"
               required
             />
@@ -124,6 +153,8 @@ export default function ProteinCalculator() {
               type="radio"
               name="activity"
               value="active"
+              checked={activityLevel === 'active'}
+              onChange={e => setActivityLevel(e.target.value)}
               aria-label="Active (exercise 3-5 days a week)"
               required
             />
@@ -132,6 +163,8 @@ export default function ProteinCalculator() {
               type="radio"
               name="activity"
               value="very-active"
+              checked={activityLevel === 'very-active'}
+              onChange={e => setActivityLevel(e.target.value)}
               aria-label="Very Active (exercise 5-7 days a week)"
               required
             />
@@ -143,6 +176,8 @@ export default function ProteinCalculator() {
               type="radio"
               name="gender"
               value="male"
+              checked={gender === 'male'}
+              onChange={e => setGender(e.target.value)}
               aria-label="Male"
               required
             />
@@ -151,6 +186,8 @@ export default function ProteinCalculator() {
               type="radio"
               name="gender"
               value="female"
+              checked={gender === 'female'}
+              onChange={e => setGender(e.target.value)}
               aria-label="Female"
               required
             />

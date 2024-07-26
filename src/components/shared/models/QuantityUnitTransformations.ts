@@ -5,6 +5,7 @@ const fractionMap: { [key: number]: string } = {
   0.25: '¼',
   0.333: '⅓',
   0.5: '½',
+  0.666: '⅔',
   0.75: '¾',
 };
 
