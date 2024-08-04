@@ -51,7 +51,7 @@ export default async function Home() {
     <section className="flex flex-col gap-8 md:gap-14">
       <HeroCard {...latestRecipeHero} />
 
-      <RecipeImageCarousel title="Newest recipes" recipes={recipes} />
+      <RecipeImageCarousel title="Newest recipes" recipes={recipes.slice(0, 5)} />
 
       <HeroCard {...latestArticleHero} />
 
