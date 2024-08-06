@@ -31,6 +31,11 @@ export default async function sitemap() {
       priority: 0.8,
     },
     {
+      url: 'https://rippd.io/recipes/all',
+      lastModified: new Date(),
+      priority: 0.8,
+    },
+    {
       url: 'https://rippd.io/blog/why-is-protein-important',
       lastModified: new Date(),
       priority: 0.8,
