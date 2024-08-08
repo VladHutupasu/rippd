@@ -1,25 +1,21 @@
-import {
-  BeakerIcon,
-  BoltIcon,
-  ClockIcon,
-  Cog8ToothIcon,
-  FireIcon,
-  LightBulbIcon,
-  RocketLaunchIcon,
-} from '@heroicons/react/24/outline';
+import InfoAndMacros from '@features/recipe/InfoAndMacros';
+import Ingredients from '@features/recipe/Ingredients';
+import InstructionsAndTips from '@features/recipe/InstructionsAndTips';
+import Tags from '@features/recipe/Tags';
 import db from '@lib/prisma';
-import { formatQuantity } from '@shared/models/QuantityUnitTransformations';
+import { Ingredient, Instructions, Macros, Recipe, RecipeIngredient } from '@prisma/client';
+import { calculateMacros, generateJSONLD } from '@shared/utils/recipeUtils';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-const recipeNotFoundMetadata = {
-  title: 'Recipe not found',
-  description: 'The recipe you are looking for does not exist.',
-  keywords: [],
-};
-
 export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const recipeNotFoundMetadata = {
+    title: 'Recipe not found',
+    description: 'The recipe you are looking for does not exist.',
+    keywords: [],
+  };
+
   try {
     const response = await db.recipe.findUnique({
       where: {
@@ -79,8 +75,29 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
+/**
+ * Function to generate static pages on build
+ * @returns a list of `params` to populate the [slug] dynamic segment
+/**
+ */
+export async function generateStaticParams() {
+  const recipeSlugs = await db.recipe.findMany({
+    select: {
+      slug: true,
+    },
+  });
+  return recipeSlugs.map(recipeSlug => ({
+    slug: recipeSlug.slug,
+  }));
+}
+
+export type RecipeDetails = Recipe & {
+  Instructions: Instructions | null;
+  RecipeIngredient: (RecipeIngredient & { Ingredient: Ingredient & { Macros: Macros | null } })[];
+};
+
 export default async function RecipeDetails({ params }: { params: { slug: string } }) {
-  let recipe;
+  let recipe: RecipeDetails | null = null;
 
   try {
     recipe = await db.recipe.findUnique({
@@ -110,62 +127,11 @@ export default async function RecipeDetails({ params }: { params: { slug: string
 
   const recipeImage: StaticImageData = require(`@public/images/recipes/${recipe.imageSrc}`).default;
 
-  // Calculate total macros
-  const macros = recipe.RecipeIngredient.reduce(
-    (acc, curr) => {
-      if (curr.Ingredient.Macros) {
-        acc.calories += curr.Ingredient.Macros.calories * curr.quantity;
-        acc.carbs += curr.Ingredient.Macros.carbs * curr.quantity;
-        acc.protein += curr.Ingredient.Macros.protein * curr.quantity;
-        acc.fats += curr.Ingredient.Macros.fats * curr.quantity;
-      }
-      return acc;
-    },
-    { calories: 0, carbs: 0, protein: 0, fats: 0 }
-  );
-
-  const macrosPerServing = {
-    calories: Math.ceil(macros.calories / recipe.servings),
-    carbs: Math.ceil(macros.carbs / recipe.servings),
-    protein: Math.ceil(macros.protein / recipe.servings),
-    fats: Math.ceil(macros.fats / recipe.servings),
-  };
-
-  const wValues = [128, 256, 384, 640, 1200];
-  const imageURLs = wValues.map(w => `https://rippd.io/_next/image?url=${recipeImage.src}&w=${w}&q=75`);
+  // Calculate macros
+  const macrosPerServing = calculateMacros(recipe.RecipeIngredient, recipe.servings);
 
   // Generate JSON-LD schema
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Recipe',
-    author: {
-      '@type': 'Organization',
-      name: 'Rippd',
-    },
-    name: recipe.name,
-    description: recipe.description,
-    image: imageURLs,
-    recipeYield: `${recipe.servings} servings`,
-    recipeIngredient: recipe.RecipeIngredient.map(recipe => {
-      return { ...recipe.Ingredient, quantityAndUnit: formatQuantity(recipe.quantity, recipe.Ingredient.unit) };
-    }).map(ingredient => ingredient.quantityAndUnit + ' ' + ingredient.name),
-    recipeInstructions: recipe.Instructions?.steps.map(step => {
-      return { '@type': 'HowToStep', text: step };
-    }),
-    recipeCategory: recipe.tags,
-    cookTime: `PT${recipe.cookTime}M`,
-    nutrition: {
-      '@type': 'NutritionInformation',
-      calories: macrosPerServing.calories,
-      carbohydrateContent: macrosPerServing.carbs,
-      proteinContent: macrosPerServing.protein,
-      fatContent: macrosPerServing.fats,
-    },
-    //TODO: Add recipeCuisine
-    //TODO: Add prepTime, cookTime, totalTime
-    // TODO: Imrpove this keywords section, now using tags
-    keywords: recipe.name,
-  };
+  const jsonLd = generateJSONLD(recipeImage, recipe, macrosPerServing);
 
   return (
     <section>
@@ -183,6 +149,7 @@ export default async function RecipeDetails({ params }: { params: { slug: string
           <li>{recipe.name}</li>
         </ul>
       </div>
+
       <div className="flex flex-col lg:flex-row gap-8">
         <Image
           src={recipeImage}
@@ -202,123 +169,17 @@ export default async function RecipeDetails({ params }: { params: { slug: string
           placeholder="blur"
         />
 
-        <div className="flex flex-col max-sm:pt-[20rem] justify-between gap-2">
-          <h1 className="text-3xl lg:text-6xl text-left font-bold text-base-content mb-2">{recipe.name}</h1>
-
-          <div className="flex flex-col gap-3 sm:gap-4 xl:gap-8">
-            {/* Info */}
-            <div className="stats stats-horizontal font-light shadow h-20 sm:h-24 2xl:h-28 flex">
-              <div className="stat px-3 sm:px-8 flex-1 min-w-24">
-                <div className="stat-title text-xs sm:text-sm xl:text-base">
-                  Calories <BeakerIcon className="h-4 w-4 inline-block" />
-                </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.calories}</div>
-              </div>
-
-              <div className="stat px-3 sm:px-8 flex-1 min-w-24">
-                <div className="stat-title text-xs sm:text-sm xl:text-base">
-                  Time <ClockIcon className="h-4 w-4 inline-block" />
-                </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{recipe.cookTime}m</div>
-              </div>
-
-              <div className="stat px-3 sm:px-8 flex-1 min-w-24">
-                <div className="stat-title text-xs sm:text-sm xl:text-base">
-                  Complexity <Cog8ToothIcon className="h-4 w-4 inline-block" />
-                </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{recipe.complexity}</div>
-              </div>
-            </div>
-
-            {/* Macros */}
-            <div className="stats stats-horizontal font-light shadow h-20 sm:h-24 2xl:h-28 flex">
-              <div className="stat px-3 sm:px-8 flex-1 min-w-24">
-                <div className="stat-title text-xs sm:text-sm xl:text-base">
-                  Carbs <BoltIcon className="h-4 w-4 inline-block" />
-                </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.carbs}g</div>
-              </div>
-
-              <div className="stat px-3 sm:px-8 flex-1 min-w-24">
-                <div className="stat-title text-xs sm:text-sm xl:text-base">
-                  Protein <FireIcon className="h-4 w-4 inline-block" />
-                </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.protein}g</div>
-              </div>
-
-              <div className="stat px-3 sm:px-8 flex-1 min-w-24">
-                <div className="stat-title text-xs sm:text-sm xl:text-base">
-                  Fats <RocketLaunchIcon className="h-4 w-4 inline-block" />
-                </div>
-                <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.fats}g</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <InfoAndMacros recipe={recipe} macrosPerServing={macrosPerServing} />
       </div>
 
       {/* Tags */}
-      <div className="mt-4">
-        {recipe.tags.map(tag => (
-          <div key={tag} className="badge badge-sm badge-primary text-base-100 mr-2">
-            {tag.toLowerCase().replace(/_/g, ' ')}
-          </div>
-        ))}
-      </div>
+      <Tags tags={recipe.tags} />
 
       {/* Ingredients */}
-      <div className="flex flex-col gap-1 font-bold mt-8 mb-4">
-        <h1 className="text-lg sm:text-xl xl:text-3xl">Ingredients</h1>
-        <h1 className="opacity-60 text-sm font-light">{recipe.servings} serving(s)</h1>
-      </div>
-      <div className="flex flex-col">
-        {recipe.RecipeIngredient.map(recipe => {
-          return { ...recipe.Ingredient, quantityAndUnit: formatQuantity(recipe.quantity, recipe.Ingredient.unit) };
-        }).map(ingredient => (
-          <label key={ingredient.id} className="label cursor-pointer justify-between px-0">
-            <div className="flex gap-2 font-light text-sm">
-              <input type="checkbox" className="checkbox checkbox-sm checkbox-primary peer" />
-              <span className="opacity-60 peer-checked:line-through">{ingredient.quantityAndUnit}</span>
-              <span className="peer-checked:line-through">{ingredient.name}</span>
-            </div>
-          </label>
-        ))}
-      </div>
+      <Ingredients recipe={recipe} />
 
-      <h1 className="font-bold text-lg sm:text-xl xl:text-3xl mt-8 mb-4">Instructions</h1>
-      <div className="flex flex-col gap-2 sm:gap-4">
-        {recipe.Instructions?.steps.map((step, index) => (
-          <p key={index} className="font-light text-sm">
-            {index + 1}. {step}
-          </p>
-        ))}
-      </div>
-
-      <h1 className="font-bold text-lg sm:text-xl xl:text-3xl mt-8 mb-4">Tips</h1>
-      <ul className="flex flex-col gap-2 sm:gap-4">
-        {recipe.Instructions?.tips.map((tip, index) => (
-          <li key={index} className="flex gap-2 font-light text-sm">
-            <LightBulbIcon className="h-4 w-4 pt-1 inline-block" />
-            {tip}
-          </li>
-        ))}
-      </ul>
+      {/* Instructions & Tips */}
+      <InstructionsAndTips recipeInstructions={recipe.Instructions} />
     </section>
   );
-}
-
-/**
- * Function to generate static pages on build
- * @returns a list of `params` to populate the [slug] dynamic segment
-/**
- */
-export async function generateStaticParams() {
-  const recipeSlugs = await db.recipe.findMany({
-    select: {
-      slug: true,
-    },
-  });
-  return recipeSlugs.map(recipeSlug => ({
-    slug: recipeSlug.slug,
-  }));
 }
