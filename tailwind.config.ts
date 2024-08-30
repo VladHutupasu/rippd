@@ -6,6 +6,13 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  theme: {
+    extend: {
+      borderRadius: {
+        'custom-shape': '35% 65% 49% 51% / 68% 19% 81% 32%',
+      },
+    },
+  },
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
   daisyui: {
     themes: [

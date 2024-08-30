@@ -23,7 +23,7 @@ export default function HeroCard({
   linkText,
 }: HeroCardProps) {
   return (
-    <div className="hero bg-base-200 p-8 rounded-md">
+    <div className="hero bg-base-200 p-8 rounded-custom-shape">
       <div
         className={`hero-content p-0 gap-0 flex-col ${
           imagePosition === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row'
