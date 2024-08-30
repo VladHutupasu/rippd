@@ -6,7 +6,10 @@ export default function Ingredients({ recipe }: { recipe: RecipeDetails }) {
   return (
     <>
       <div className="flex flex-col gap-1 font-bold mt-8 mb-4">
-        <h1 className="text-lg sm:text-xl xl:text-3xl">Ingredients</h1>
+        <h1 className="relative z-10 font-bold text-lg sm:text-xl xl:text-3xl">
+          <span className="absolute left-[25px] xl:left-[40px] bottom-[5px] w-[60px] xl:w-[90px] h-[7px] transform -skew-x-12 -translate-x-1/2 bg-primary bg-opacity-50 z-[-1]" />
+          Ingredients
+        </h1>
         <h1 className="opacity-60 text-sm font-light">{recipe.servings} serving(s)</h1>
       </div>
       <div className="flex flex-col">

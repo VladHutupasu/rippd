@@ -1,6 +1,6 @@
 import InfoAndMacros from '@features/recipe/InfoAndMacros';
 import Ingredients from '@features/recipe/Ingredients';
-import InstructionsAndTips from '@features/recipe/InstructionsAndTips';
+import InstructionsTipsAndSwaps from '@features/recipe/InstructionsTipsAndSwaps';
 import Tags from '@features/recipe/Tags';
 import db from '@lib/prisma';
 import { Ingredient, Instructions, Macros, Recipe, RecipeIngredient } from '@prisma/client';
@@ -144,13 +144,13 @@ export default async function RecipeDetails({ params }: { params: { slug: string
             <Link href={'/'}>Home</Link>
           </li>
           <li>
-            <Link href={'/'}>Recipes</Link>
+            <Link href={'/recipes/all'}>Recipes</Link>
           </li>
           <li>{recipe.name}</li>
         </ul>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8">
+      <div className="flex flex-col lg:flex-row items-center gap-8">
         <Image
           src={recipeImage}
           className="h-72 w-full object-cover absolute inset-0 mt-[8.7rem] sm:hidden"
@@ -179,7 +179,7 @@ export default async function RecipeDetails({ params }: { params: { slug: string
       <Ingredients recipe={recipe} />
 
       {/* Instructions & Tips */}
-      <InstructionsAndTips recipeInstructions={recipe.Instructions} />
+      <InstructionsTipsAndSwaps recipeInstructions={recipe.Instructions} />
     </section>
   );
 }
