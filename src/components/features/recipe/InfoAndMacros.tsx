@@ -1,4 +1,4 @@
-import { BoltIcon, FireIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
+import { BoltIcon, FireIcon, InformationCircleIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
 import { RecipeDetails } from '../../../app/recipe/[slug]/page';
 
 export default function InfoAndMacros({
@@ -16,6 +16,14 @@ export default function InfoAndMacros({
         {/* Info */}
         <div className="stats stats-horizontal font-light shadow h-20 sm:h-24 2xl:h-28 flex">
           <div className="stat px-3 sm:px-8 flex-1 min-w-24">
+            <div className="stat-figure text-primary-content">
+              <button
+                className="btn tooltip tooltip-right btn-xs btn-circle btn-ghost z-50 max-sm:-ml-2 flex items-center justify-center"
+                data-tip="Calories per serving"
+              >
+                <InformationCircleIcon strokeWidth={2} className="h-4 w-4 sm:h-5 sm:w-5" />
+              </button>
+            </div>
             <div className="stat-title font-medium text-xs sm:text-sm xl:text-base">Calories</div>
             <div className="stat-value font-bold text-lg sm:text-xl xl:text-3xl">{macrosPerServing.calories} kcal</div>
           </div>

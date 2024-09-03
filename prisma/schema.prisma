@@ -48,10 +48,12 @@ model Recipe {
 
 model Ingredient {
   id               String            @id @default(uuid())
-  name             String            @unique
+  name             String
   unit             Unit
   Macros           Macros?
   RecipeIngredient RecipeIngredient[]
+
+  @@unique([name, unit])
 }
 
 model RecipeIngredient {
